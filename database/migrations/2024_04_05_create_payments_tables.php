@@ -24,13 +24,13 @@ return new class extends Migration
         });
 
         Schema::create(config('payments.models.payment.table'), function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
 
             $table->nullableUuidMorphs('source');
             $table->nullableUuidMorphs('reason');
             $table->nullableUuidMorphs('destination');
 
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->uuid('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on(config('category.models.category.table'));
 
             $table->decimal('amount', 10, 2)->nullable();

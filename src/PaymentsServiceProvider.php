@@ -13,7 +13,8 @@ class PaymentsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ilbronza');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'payments');
+
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'ilbronza');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
