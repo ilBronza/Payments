@@ -16,4 +16,9 @@ trait InteractsWithPaymenttypes
 			config('payments.models.paymentable.table')
 		);
 	}
+
+	public function getPossiblePaymenttypesValuesArray() : array
+	{
+		return Paymenttype::getProjectClassName()::all()->pluck('name', 'id')->toArray();
+	}
 }
