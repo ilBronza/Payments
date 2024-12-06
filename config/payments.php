@@ -16,10 +16,20 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeDestroyController
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
+use IlBronza\Payments\Models\Invoice;
 use IlBronza\Payments\Models\Paymentable;
 use IlBronza\Payments\Models\Paymenttime;
 use IlBronza\Payments\Models\Paymenttype;
 use IlBronza\Prices\Models\Payments;
+use IlBronza\Vehicles\Http\Controllers\Providers\Fieldsets\VehicleCreateStoreFieldsetsParameters;
+use IlBronza\Vehicles\Http\Controllers\Providers\Fieldsets\VehicleShowFieldsetsParameters;
+use IlBronza\Vehicles\Http\Controllers\Providers\FieldsGroups\VehicleFieldsGroupParametersFile;
+use IlBronza\Vehicles\Http\Controllers\Providers\RelationshipsManagers\VehicleRelationManager;
+use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleCreateStoreController;
+use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleDestroyController;
+use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleEditUpdateController;
+use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleIndexController;
+use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleShowController;
 
 return [
 	'enabled' => true,
@@ -78,6 +88,53 @@ return [
             ]
 		],
 
+		'invoice' => [
+			'class' => Invoice::class,
+			'table' => 'payments__invoices',
+			'fieldsGroupsFiles' => [
+				'index' => InvoiceFieldsGroupParametersFile::class
+			],
+			'parametersFiles' => [
+				'create' => InvoiceCreateStoreFieldsetsParameters::class,
+				'show' => InvoiceShowFieldsetsParameters::class
+			],
+			'relationshipsManagerClasses' => [
+				'show' => InvoiceRelationManager::class
+			],
+			'controllers' => [
+				'index' => InvoiceIndexController::class,
+				'create' => InvoiceCreateStoreController::class,
+				'store' => InvoiceCreateStoreController::class,
+				'show' => InvoiceShowController::class,
+				'edit' => InvoiceEditUpdateController::class,
+				'update' => InvoiceEditUpdateController::class,
+				'destroy' => InvoiceDestroyController::class,
+			]
+		],
+
+		'invoiceable' => [
+			'class' => Invoiceable::class,
+			'table' => 'payments__invoiceables',
+//			'fieldsGroupsFiles' => [
+//				'index' => InvoiceableFieldsGroupParametersFile::class
+//			],
+//			'parametersFiles' => [
+//				'create' => InvoiceableCreateStoreFieldsetsParameters::class,
+//				'show' => InvoiceableShowFieldsetsParameters::class
+//			],
+//			'relationshipsManagerClasses' => [
+//				'show' => InvoiceableRelationManager::class
+//			],
+//			'controllers' => [
+//				'index' => InvoiceableIndexController::class,
+//				'create' => InvoiceableCreateStoreController::class,
+//				'store' => InvoiceableCreateStoreController::class,
+//				'show' => InvoiceableShowController::class,
+//				'edit' => InvoiceableEditUpdateController::class,
+//				'update' => InvoiceableEditUpdateController::class,
+//				'destroy' => InvoiceableDestroyController::class,
+//			]
+		],
 
 
 
