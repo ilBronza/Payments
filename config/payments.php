@@ -1,7 +1,20 @@
 <?php
 
+use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableDestroyController;
+use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableIndexController;
+use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableShowController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceDestroyController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceIndexController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymentableCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymenttypeCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymentableRelationManager;
@@ -17,19 +30,11 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateControl
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
 use IlBronza\Payments\Models\Invoice;
+use IlBronza\Payments\Models\Invoiceable;
 use IlBronza\Payments\Models\Paymentable;
 use IlBronza\Payments\Models\Paymenttime;
 use IlBronza\Payments\Models\Paymenttype;
 use IlBronza\Prices\Models\Payments;
-use IlBronza\Vehicles\Http\Controllers\Providers\Fieldsets\VehicleCreateStoreFieldsetsParameters;
-use IlBronza\Vehicles\Http\Controllers\Providers\Fieldsets\VehicleShowFieldsetsParameters;
-use IlBronza\Vehicles\Http\Controllers\Providers\FieldsGroups\VehicleFieldsGroupParametersFile;
-use IlBronza\Vehicles\Http\Controllers\Providers\RelationshipsManagers\VehicleRelationManager;
-use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleCreateStoreController;
-use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleDestroyController;
-use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleEditUpdateController;
-use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleIndexController;
-use IlBronza\Vehicles\Http\Controllers\Vehicles\VehicleShowController;
 
 return [
 	'enabled' => true,
@@ -95,11 +100,12 @@ return [
 				'index' => InvoiceFieldsGroupParametersFile::class
 			],
 			'parametersFiles' => [
-				'create' => InvoiceCreateStoreFieldsetsParameters::class,
-				'show' => InvoiceShowFieldsetsParameters::class
+//				'create' => InvoiceCreateStoreFieldsetsParameters::class,
+				'show' => InvoiceShowFieldsetsParameters::class,
+				'edit' => InvoiceShowFieldsetsParameters::class
 			],
 			'relationshipsManagerClasses' => [
-				'show' => InvoiceRelationManager::class
+//				'show' => InvoiceRelationManager::class
 			],
 			'controllers' => [
 				'index' => InvoiceIndexController::class,
@@ -118,22 +124,22 @@ return [
 //			'fieldsGroupsFiles' => [
 //				'index' => InvoiceableFieldsGroupParametersFile::class
 //			],
-//			'parametersFiles' => [
+			'parametersFiles' => [
 //				'create' => InvoiceableCreateStoreFieldsetsParameters::class,
-//				'show' => InvoiceableShowFieldsetsParameters::class
-//			],
+				'show' => InvoiceableShowFieldsetsParameters::class
+			],
 //			'relationshipsManagerClasses' => [
 //				'show' => InvoiceableRelationManager::class
 //			],
-//			'controllers' => [
-//				'index' => InvoiceableIndexController::class,
-//				'create' => InvoiceableCreateStoreController::class,
-//				'store' => InvoiceableCreateStoreController::class,
-//				'show' => InvoiceableShowController::class,
-//				'edit' => InvoiceableEditUpdateController::class,
-//				'update' => InvoiceableEditUpdateController::class,
-//				'destroy' => InvoiceableDestroyController::class,
-//			]
+			'controllers' => [
+				'index' => InvoiceableIndexController::class,
+				'create' => InvoiceableCreateStoreController::class,
+				'store' => InvoiceableCreateStoreController::class,
+				'show' => InvoiceableShowController::class,
+				'edit' => InvoiceableEditUpdateController::class,
+				'update' => InvoiceableEditUpdateController::class,
+				'destroy' => InvoiceableDestroyController::class,
+			]
 		],
 
 
