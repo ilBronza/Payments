@@ -10,6 +10,7 @@ use IlBronza\FileCabinet\Traits\InteractsWithFormTrait;
 use IlBronza\Products\Models\Orders\Orderrow;
 use IlBronza\Products\Models\Quotations\Quotationrow;
 
+use IlBronza\Products\Models\Sellables\Supplier;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Invoice extends BasePaymentsModel
@@ -31,7 +32,7 @@ class Invoice extends BasePaymentsModel
 
 	public function emitter()
 	{
-		return $this->belongsTo(Client::gpc());
+		return $this->belongsTo(Supplier::gpc());
 	}
 
 	public function target()

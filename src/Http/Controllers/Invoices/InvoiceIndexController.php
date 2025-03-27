@@ -5,6 +5,8 @@ namespace IlBronza\Payments\Http\Controllers\Invoices;
 use IlBronza\CRUD\Traits\CRUDIndexTrait;
 use IlBronza\CRUD\Traits\CRUDPlainIndexTrait;
 
+use function config;
+
 class InvoiceIndexController extends InvoiceCRUD
 {
 	public $avoidCreateButton = true;
@@ -15,6 +17,7 @@ class InvoiceIndexController extends InvoiceCRUD
 
     public function getIndexFieldsArray()
     {
+		//InvoiceFieldsGroupParametersFile
         return config('payments.models.invoice.fieldsGroupsFiles.index')::getFieldsGroup();
     }
 
@@ -26,7 +29,11 @@ class InvoiceIndexController extends InvoiceCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('target', 'emitter', 'invoiceables')->get();
+        return $this->getModelClass()::with([
+			'target',
+	        'emitter.target',
+	        'invoiceables.target'
+        ])->get();
     }
 
 }
