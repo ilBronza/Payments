@@ -22,7 +22,7 @@ class InvoiceFieldsGroupParametersFile extends FieldsGroupParametersFile
 		            ]
 	            ],
 	            'description' => 'flat',
-	            'amount' => 'flat',
+//	            'amount' => 'flat',
 
 	            'target' => 'relations.belongsTo',
 	            'emitter' => 'relations.belongsTo',
