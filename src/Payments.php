@@ -53,7 +53,7 @@ class Payments implements RoutedObjectInterface
             $menu->createButton([
                 'name' => 'paymentables.list',
                 'icon' => 'list',
-                'text' => 'payments::paymenttable.list',
+                'text' => 'payments::paymentables.list',
                 'href' => $this->route('paymentables.index')
             ])
         );
