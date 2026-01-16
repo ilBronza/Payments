@@ -26,6 +26,7 @@ class InvoiceFieldsGroupParametersFile extends FieldsGroupParametersFile
 
 	            'target' => 'relations.belongsTo',
 	            'emitter' => 'relations.belongsTo',
+	            'passeParToutSupplier.name' => 'flat',
 	            'invoiceables' => 'relations.belongsToMany',
 
 	            'mySelfDelete' => 'links.delete'

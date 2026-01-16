@@ -55,6 +55,6 @@ class Invoiceable extends MorphPivot
 
 	public function getNameForDisplayRelation()
 	{
-		return $this->getTarget()->getInvoiceableDetail();
+		return $this->getTarget()?->getInvoiceableDetail();
 	}
 }
