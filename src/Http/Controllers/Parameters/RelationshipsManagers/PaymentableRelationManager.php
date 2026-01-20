@@ -3,7 +3,7 @@
 namespace IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers;
 
 use IlBronza\CRUD\Providers\RelationshipsManager\RelationshipsManager;
-use IlBronza\Ukn\Facades\Ukn;
+use IlBronza\Ukn\Ukn;
 use Illuminate\Support\Facades\Log;
 
 class PaymentableRelationManager Extends RelationshipsManager
