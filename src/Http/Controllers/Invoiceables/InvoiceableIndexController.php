@@ -14,13 +14,13 @@ class InvoiceableIndexController extends InvoiceableCRUD
 
     public function getIndexFieldsArray()
     {
-        return config('payments.models.invoiceable.fieldsGroupsFiles.index')::getFieldsGroup();
+        return config('payments.models.invoiceable.fieldsGroupsFiles.index')::getTracedFieldsGroup();
     }
 
     public function getRelatedFieldsArray()
     {
         return $this->getIndexFieldsArray();
-        // return config('payments.models.invoiceable.fieldsGroupsFiles.index')::getFieldsGroup();
+        // return config('payments.models.invoiceable.fieldsGroupsFiles.index')::getTracedFieldsGroup();
     }
 
     public function getIndexElements()

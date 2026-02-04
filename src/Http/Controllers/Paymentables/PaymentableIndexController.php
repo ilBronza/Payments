@@ -15,13 +15,13 @@ class PaymentableIndexController extends PaymentableCRUD
 
     public function getIndexFieldsArray()
     {
-        return config('payments.models.paymentable.fieldsGroupsFiles.index')::getFieldsGroup();
+        return config('payments.models.paymentable.fieldsGroupsFiles.index')::getTracedFieldsGroup();
     }
 
     public function getRelatedFieldsArray()
     {
         return $this->getIndexFieldsArray();
-        // return config('payments.models.paymentable.fieldsGroupsFiles.index')::getFieldsGroup();
+        // return config('payments.models.paymentable.fieldsGroupsFiles.index')::getTracedFieldsGroup();
     }
 
     public function getIndexElements()
