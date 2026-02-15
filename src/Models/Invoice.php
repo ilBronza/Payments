@@ -35,6 +35,11 @@ class Invoice extends BasePaymentsModel
 		return $this->belongsTo(Supplier::gpc());
 	}
 
+	public function getEmitter() : ? Supplier
+	{
+		return $this->emitter;
+	}
+
 	public function target()
 	{
 		return $this->belongsTo(Client::gpc());
@@ -56,7 +61,7 @@ class Invoice extends BasePaymentsModel
 		)->using(Invoiceable::gpc())->withTimestamps();
 	}
 
-	public function orderrows(): MorphToMany
+	public function orderrows()
 	{
 		return $this->morphedByMany(
 			Orderrow::gpc(),
@@ -86,5 +91,13 @@ class Invoice extends BasePaymentsModel
 	public function scopeByEmitter($query, $emitter)
 	{
 		$query->where('emitter_id', $emitter->getKey());
+	}
+
+	public function scopeByYear($query, $year)
+	{
+		$query->whereBetween('date', [
+			"{$year}-01-01 00:00:00",
+			"{$year}-12-31 23:59:59",
+		]);
 	}
 }

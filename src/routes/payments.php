@@ -25,6 +25,10 @@ Route::group([
 	{
 		//InvoiceIndexController
 		Route::get('', [Payments::getController('invoice', 'index'), 'index'])->name('invoices.index');
+
+		//InvoiceByYearIndexController
+		Route::get('by-year/{year}', [Payments::getController('invoice', 'byYear'), 'index'])->name('invoices.byYear');
+
 		Route::get('create', [Payments::getController('invoice', 'create'), 'create'])->name('invoices.create');
 		Route::post('', [Payments::getController('invoice', 'store'), 'store'])->name('invoices.store');
 		Route::get('{invoice}', [Payments::getController('invoice', 'show'), 'show'])->name('invoices.show');

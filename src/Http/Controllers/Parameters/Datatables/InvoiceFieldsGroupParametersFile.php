@@ -22,12 +22,15 @@ class InvoiceFieldsGroupParametersFile extends FieldsGroupParametersFile
 		            ]
 	            ],
 	            'description' => 'flat',
-//	            'amount' => 'flat',
+	            'amount' => 'numbers.number2',
 
 	            'target' => 'relations.belongsTo',
 	            'emitter' => 'relations.belongsTo',
 	            'passeParToutSupplier.name' => 'flat',
 	            'invoiceables' => 'relations.belongsToMany',
+
+                'orderrows' => 'payments::orderrows.totals',
+                'mySelf.orderrows' => 'payments::orderrows.total',
 
 	            'mySelfDelete' => 'links.delete'
             ]

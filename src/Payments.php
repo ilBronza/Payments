@@ -4,12 +4,40 @@ namespace IlBronza\Payments;
 
 use IlBronza\CRUD\Providers\RouterProvider\RoutedObjectInterface;
 use IlBronza\CRUD\Traits\IlBronzaPackages\IlBronzaPackagesTrait;
+use IlBronza\Payments\Models\Invoice;
 
 class Payments implements RoutedObjectInterface
 {
     use IlBronzaPackagesTrait;
 
     static $packageConfigPrefix = 'payments';
+
+    public function getInvoicesByYearChildren()
+    {
+        return cache()->rememberForever('_getInvoicesByYearChildren', function()
+        {
+            $result = [];
+
+            $years = Invoice::gpc()::query()
+                ->selectRaw('YEAR(date) as year')
+                ->distinct()
+                ->orderBy('year', 'desc')
+                ->pluck('year')
+                ->filter();
+
+            foreach($years as $year)
+            {
+                $result[] = [
+                    'name' => 'invoices.byYear' . $year,
+                    'icon' => 'gear',
+                    'translatedText' => $year,
+                    'href' => $this->route('invoices.byYear', ['year' => $year])
+                ];
+            }
+
+            return $result;
+        });
+    }
 
     public function manageMenuButtons()
     {
@@ -45,7 +73,8 @@ class Payments implements RoutedObjectInterface
 			    'name' => 'invoices.list',
 			    'icon' => 'gear',
 			    'text' => 'payments::invoices.list',
-			    'href' => $this->route('invoices.index')
+			    'href' => $this->route('invoices.index'),
+                'children' => $this->getInvoicesByYearChildren()
 		    ])
 	    );
 

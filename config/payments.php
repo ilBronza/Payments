@@ -5,6 +5,7 @@ use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableDestroyController
 use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableIndexController;
 use IlBronza\Payments\Http\Controllers\Invoiceables\InvoiceableShowController;
+use IlBronza\Payments\Http\Controllers\Invoices\InvoiceByYearIndexController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceDestroyController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceEditUpdateController;
@@ -13,8 +14,8 @@ use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
-use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceShowFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymentableCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymenttypeCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymentableRelationManager;
@@ -109,6 +110,7 @@ return [
 			],
 			'controllers' => [
 				'index' => InvoiceIndexController::class,
+				'byYear' => InvoiceByYearIndexController::class,
 				'create' => InvoiceCreateStoreController::class,
 				'store' => InvoiceCreateStoreController::class,
 				'show' => InvoiceShowController::class,
