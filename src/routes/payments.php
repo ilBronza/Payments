@@ -23,7 +23,6 @@ Route::group([
 
 	Route::group(['prefix' => 'invoices'], function()
 	{
-		//InvoiceIndexController
 		Route::get('', [Payments::getController('invoice', 'index'), 'index'])->name('invoices.index');
 
 		//InvoiceByYearIndexController
@@ -31,11 +30,30 @@ Route::group([
 
 		Route::get('create', [Payments::getController('invoice', 'create'), 'create'])->name('invoices.create');
 		Route::post('', [Payments::getController('invoice', 'store'), 'store'])->name('invoices.store');
+
+		//InvoiceGeneratePdfController
+		Route::get('{invoice}/generate-pdf', [Payments::getController('invoice', 'generatePdf'), 'generatePdf'])->name('invoices.generatePdf');
 		Route::get('{invoice}', [Payments::getController('invoice', 'show'), 'show'])->name('invoices.show');
 		Route::get('{invoice}/edit', [Payments::getController('invoice', 'edit'), 'edit'])->name('invoices.edit');
 		Route::put('{invoice}', [Payments::getController('invoice', 'edit'), 'update'])->name('invoices.update');
 
 		Route::delete('{invoice}/delete', [Payments::getController('invoice', 'destroy'), 'destroy'])->name('invoices.destroy');
+
+	});
+
+	Route::group(['prefix' => 'deadlines'], function()
+	{
+		Route::get('export-bank-transfers', [Payments::getController('deadline', 'exportBankTransefers'), 'index'])->name('deadlines.exportBankTransefersIndex');
+		//DeadlineExportCsvController
+		Route::post('export-csv', [Payments::getController('deadline', 'exportCsv'), 'exportCsv'])->name('deadlines.exportCsv');
+
+		Route::get('', [Payments::getController('deadline', 'index'), 'index'])->name('deadlines.index');
+		Route::get('create', [Payments::getController('deadline', 'create'), 'create'])->name('deadlines.create');
+		Route::post('', [Payments::getController('deadline', 'store'), 'store'])->name('deadlines.store');
+		Route::get('{deadline}', [Payments::getController('deadline', 'show'), 'show'])->name('deadlines.show');
+		Route::get('{deadline}/edit', [Payments::getController('deadline', 'edit'), 'edit'])->name('deadlines.edit');
+		Route::put('{deadline}', [Payments::getController('deadline', 'edit'), 'update'])->name('deadlines.update');
+		Route::delete('{deadline}/delete', [Payments::getController('deadline', 'destroy'), 'destroy'])->name('deadlines.destroy');
 	});
 
 	Route::group(['prefix' => 'invoiceables'], function()

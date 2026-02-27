@@ -16,6 +16,12 @@ class InvoiceShowFieldsetsParameters extends FieldsetParametersFile
 			        'date' => ['date' => 'date|nullable'],
 			        'description' => ['textEditor' => 'string|nullable|max:2048'],
 			        'amount' => ['number' => 'numeric|nullable|min:0|max:999999.99'],
+			        'confirmed' => ['boolean' => 'boolean|nullable'],
+			        'approved' => ['boolean' => 'boolean|nullable'],
+			        'sent_payment' => ['boolean' => 'boolean|nullable'],
+			        'payment_confirmed' => ['boolean' => 'boolean|nullable'],
+			        'exported_at' => ['datetime' => 'nullable|date'],
+			        'exported_by' => ['text' => 'nullable|uuid'],
 		        ],
 		        'width' => ['1-3@l', '1-2@m']
 	        ],

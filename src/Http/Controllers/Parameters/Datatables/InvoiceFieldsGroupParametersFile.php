@@ -24,10 +24,33 @@ class InvoiceFieldsGroupParametersFile extends FieldsGroupParametersFile
 	            'description' => 'flat',
 	            'amount' => 'numbers.number2',
 
+	            'confirmed' => [
+		            'type' => 'editor.toggle',
+		            'width' => '5em'
+	            ],
+	            'approved' => [
+		            'type' => 'editor.toggle',
+		            'width' => '5em'
+	            ],
+	            'sent_payment' => [
+		            'type' => 'editor.toggle',
+		            'width' => '5em'
+	            ],
+	            'payment_confirmed' => [
+		            'type' => 'editor.toggle',
+		            'width' => '5em'
+	            ],
+	            'exported_at' => [
+		            'type' => 'dates.datetime',
+		            'width' => '10em'
+	            ],
+	            'exported_by' => 'flat',
+
 	            'target' => 'relations.belongsTo',
 	            'emitter' => 'relations.belongsTo',
 	            'passeParToutSupplier.name' => 'flat',
 	            'invoiceables' => 'relations.belongsToMany',
+	            'deadlines' => 'relations.hasMany',
 
                 'orderrows' => 'payments::orderrows.totals',
                 'mySelf.orderrows' => 'payments::orderrows.total',

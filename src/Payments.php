@@ -59,26 +59,44 @@ class Payments implements RoutedObjectInterface
 
         $settingsButton->addChild($paymentsManagerButton);
 
-	    $paymentsManagerButton->addChild(
-		    $menu->createButton([
-			    'name' => 'paymenttypes.list',
-			    'icon' => 'gear',
-			    'text' => 'payments::paymenttypes.list',
-			    'href' => $this->route('paymenttypes.index')
-		    ])
-	    );
+        $paymentsManagerButton->addChild(
+            $menu->createButton([
+        	    'name' => 'paymenttypes.list',
+        	    'icon' => 'gear',
+        	    'text' => 'payments::paymenttypes.list',
+        	    'href' => $this->route('paymenttypes.index')
+            ])
+        );
 
-	    $paymentsManagerButton->addChild(
-		    $menu->createButton([
-			    'name' => 'invoices.list',
-			    'icon' => 'gear',
-			    'text' => 'payments::invoices.list',
-			    'href' => $this->route('invoices.index'),
+        $paymentsManagerButton->addChild(
+            $menu->createButton([
+                'name' => 'invoices.list',
+                'icon' => 'gear',
+                'text' => 'payments::invoices.list',
+                'href' => $this->route('invoices.index'),
                 'children' => $this->getInvoicesByYearChildren()
-		    ])
-	    );
+            ])
+        );
 
-	    $paymentsManagerButton->addChild(
+        $paymentsManagerButton->addChild(
+            $menu->createButton([
+                'name' => 'invoices.exportBankTransfers',
+                'icon' => 'gear',
+                'text' => 'payments::invoices.exportBankTransfers',
+                'href' => $this->route('deadlines.exportBankTransefersIndex'),
+            ])
+        );
+
+        $paymentsManagerButton->addChild(
+            $menu->createButton([
+                'name' => 'deadlines.list',
+                'icon' => 'calendar',
+                'text' => 'payments::deadlines.list',
+                'href' => $this->route('deadlines.index')
+            ])
+        );
+
+        $paymentsManagerButton->addChild(
             $menu->createButton([
                 'name' => 'paymentables.list',
                 'icon' => 'list',

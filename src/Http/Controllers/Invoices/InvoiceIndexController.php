@@ -5,11 +5,15 @@ namespace IlBronza\Payments\Http\Controllers\Invoices;
 use IlBronza\CRUD\Traits\CRUDIndexTrait;
 use IlBronza\CRUD\Traits\CRUDPlainIndexTrait;
 
+use function app;
 use function config;
+use function trans;
 
 class InvoiceIndexController extends InvoiceCRUD
 {
 	public $avoidCreateButton = true;
+	public $rowSelectCheckboxes = true;
+
     use CRUDPlainIndexTrait;
     use CRUDIndexTrait;
 

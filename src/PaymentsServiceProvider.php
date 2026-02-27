@@ -18,7 +18,7 @@ class PaymentsServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'payments');
 
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'ilbronza');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'payments');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         if (app() instanceof \Illuminate\Foundation\Application)
@@ -68,9 +68,9 @@ class PaymentsServiceProvider extends ServiceProvider
         ], 'payments.config');
 
         // Publishing the views.
-        /*$this->publishes([
+        $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/ilbronza'),
-        ], 'payments.views');*/
+        ], 'payments.views');
 
         // Publishing assets.
         /*$this->publishes([
