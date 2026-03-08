@@ -12,7 +12,7 @@ class InvoiceDetail extends BasePaymentsModel
 
     protected $keyType = 'string';
 
-    static $modelConfigPrefix = 'invoice_detail';
+    static $modelConfigPrefix = 'invoiceDetail';
 
     static $deletingRelationships = [];
 

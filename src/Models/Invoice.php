@@ -528,6 +528,12 @@ public function getPaymentDueDateFormatted(): ?string
 	}
 }
 
+public function getNameDateString() : string
+{
+	if(! $this->date)
+		return $this->name;
 
+	return "{$this->name} - {$this->date->format('d-m-Y')}";
+}
 
 }

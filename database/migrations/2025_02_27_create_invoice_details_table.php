@@ -17,11 +17,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('invoice_id');
             $table->string('description', 255)->nullable();
-            $table->unsignedInteger('sorting_index')->nullable()
-            $table->decimal('quantity', 12, 4)->nullable()
-            $table->decimal('unit_price', 12, 2)->nullable()
-            $table->decimal('total_price', 12, 2)->nullable()
-            $table->decimal('vat_rate', 5, 2)->nullable()
+            $table->unsignedInteger('sorting_index')->nullable();
+            $table->decimal('quantity', 12, 4)->nullable();
+            $table->decimal('unit_price', 12, 2)->nullable();
+            $table->decimal('total_price', 12, 2)->nullable();
+            $table->decimal('vat_rate', 5, 2)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('payments.models.invoice_detail.table'));
+        Schema::dropIfExists(config('payments.models.invoiceDetail.table'));
     }
 };
