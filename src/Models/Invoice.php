@@ -387,10 +387,20 @@ public function getSocialSecurityExemptionCode(): string
 
 public function getDetails(): Collection
 {
-	$invoiceables = $this->invoiceables()->with('target')->get();
 	$defaultUm = config('payments.invoice.defaults.default_unit_of_measure', 'NR');
 	$defaultVat = config('payments.invoice.defaults.vat_exigibility_code', 'N2.2');
 
+	if ($this->details->isNotEmpty()) {
+		return $this->details->map(fn (InvoiceDetail $detail) => [
+			$detail->description ?? '',
+			$defaultUm,
+			(float) ($detail->quantity ?? 1),
+			(float) ($detail->unit_price ?? 0),
+			$detail->vat_rate !== null ? number_format((float) $detail->vat_rate, 2, ',', '.') : $defaultVat,
+		])->values();
+	}
+
+	$invoiceables = $this->invoiceables()->with('target')->get();
 	$details = collect();
 
 	foreach ($invoiceables as $invoiceable) {
