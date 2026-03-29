@@ -15,4 +15,8 @@ return [
     'create' => 'Nuova scadenza',
     'edit' => 'Modifica scadenza',
     'show' => 'Dettaglio scadenza',
+
+    'exportCsv' => 'Esporta CSV',
+    'noIdsProvided' => 'Nessun ID scadenza fornito',
+    'alreadyExported' => 'Le seguenti scadenze sono già state esportate: :names',
 ];

@@ -56,4 +56,14 @@ class Deadline extends BasePaymentsModel
     {
         $query->where('temp_ist_scad', 'B');
     }
+
+    public function scopeExported($query)
+    {
+        $query->whereNotNull('exported_at');
+    }
+
+    public function hasBeenExported() : bool
+    {
+        return !! $this->exported_at;
+    }
 }

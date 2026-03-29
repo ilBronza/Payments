@@ -1,15 +1,16 @@
 <?php
 
-namespace IlBronza\Payments\Http\Controllers\Invoices;
+namespace IlBronza\Payments\Http\Controllers\Deadlines;
 
 use Carbon\Carbon;
-use IlBronza\Payments\Models\Invoice;
+use IlBronza\Payments\Http\Controllers\Deadlines\DeadlineCRUD;
+use IlBronza\Payments\Models\Deadline;
 use IlBronza\Ukn\Ukn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function trans;
 
-class DeadlineExportCsvController extends InvoiceCRUD
+class DeadlineExportCsvController extends DeadlineCRUD
 {
     public $allowedMethods = ['exportCsv'];
 
@@ -39,41 +40,40 @@ class DeadlineExportCsvController extends InvoiceCRUD
         $ids = $request->input('ids', []);
 
         if (empty($ids)) {
-            Ukn::e(trans('payments::invoices.noIdsProvided'));
+            Ukn::e(trans('payments::deadlines.noIdsProvided'));
 
             return back();
         }
 
-        $invoices = $this->getModelClass()::with([
-            'target.destinations.address',
-            'target.defaultDestination.address',
-            'target.legalDestination.address',
-            'emitter.target',
-            'target.address',
+        $deadlines = $this->getModelClass()::with([
+            'invoice.emitter.target',
+            'invoice.target.legalDestination.address',
+            'invoice.target.defaultDestination.address',
         ])
             ->whereIn('id', $ids)
             ->get();
 
-        $alreadyExported = $invoices->filter(fn (Invoice $invoice) => $invoice->exported_at !== null);
+        $alreadyExported = $deadlines->filter(fn (Deadline $deadline) => $deadline->exported_at !== null);
 
         if ($alreadyExported->isNotEmpty()) {
-            $names = $alreadyExported->pluck('name')->implode(', ');
+            $names = $alreadyExported->map(fn (Deadline $d) => $d->getInvoice()?->name ?? $d->getKey())->implode(', ');
 
-            Ukn::e(trans('payments::invoices.alreadyExported', ['names' => $names]));
+            Ukn::e(trans('payments::deadlines.alreadyExported', ['names' => $names]));
 
             return back();
         }
 
-        $filename = 'export_fatture_' . now()->format('Y-m-d_His') . '.csv';
+        $filename = 'export_scadenze_' . now()->format('Y-m-d_His') . '.csv';
 
         $array = [];
 
-        foreach ($invoices as $invoice)
-            $array[] = $this->invoiceToCsvRow($invoice);
+        foreach ($deadlines as $deadline) {
+            $array[] = $this->deadlineToCsvRow($deadline);
+        }
 
-        $this->markInvoicesAsExported($invoices);
+        $this->markDeadlinesAsExported($deadlines);
 
-        return response()->streamDownload(function () use ($invoices, $array) {
+        return response()->streamDownload(function () use ($array) {
             $handle = fopen('php://output', 'w');
             fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF)); // UTF-8 BOM
             fputcsv($handle, $this->csvHeaders, ';');
@@ -89,24 +89,27 @@ class DeadlineExportCsvController extends InvoiceCRUD
         ]);
     }
 
-    protected function markInvoicesAsExported($invoices): void
+    protected function markDeadlinesAsExported($deadlines): void
     {
         $exportedAt = Carbon::now();
         $exportedBy = Auth::id();
 
-        foreach ($invoices as $invoice) {
-            $invoice->update([
-                'exported_at' => $exportedAt,
-                'exported_by' => $exportedBy,
-            ]);
+        foreach ($deadlines as $deadline) {
+            $deadline->exported_at = $exportedAt;
+            $deadline->exported_by = $exportedBy;
+
+            $deadline->save();
+
+            $deadline->invoice->checkExportation();
         }
     }
 
-    protected function invoiceToCsvRow(Invoice $invoice): array
+    protected function deadlineToCsvRow(Deadline $deadline): array
     {
-        $parameters = $invoice->parameters ?? [];
-        $target = $invoice->target;
-        $emitter = $invoice->emitter;
+        $invoice = $deadline->getInvoice();
+        $parameters = $invoice?->parameters ?? [];
+        $target = $invoice?->target;
+        $emitter = $invoice?->emitter;
         $destination = $target?->getLegalDestination() ?? $target?->getDefaultDestination();
 
         $address = $destination?->address ?? $destination?->provideAddressModelForExtraFields();
@@ -115,9 +118,9 @@ class DeadlineExportCsvController extends InvoiceCRUD
 
         return [
             $parameters['causale'] ?? '48000',
-            number_format((float) ($invoice->amount ?? 0), 2, '.', ''),
-            $invoice->date?->format('d/m/Y') ?? '',
-            $invoice->description ?? '',
+            number_format((float) ($deadline->total_cost ?? 0), 2, '.', ''),
+            $deadline->due_date?->format('d/m/Y') ?? '',
+            $invoice?->description ?? '',
             $emitterName,
             $parameters['iban_ordinante'] ?? '',
             $target?->getName() ?? '',
@@ -127,7 +130,7 @@ class DeadlineExportCsvController extends InvoiceCRUD
             $address?->getZip() ?? $destination?->getZip() ?? '',
             $address?->getProvince() ?? $destination?->getProvince() ?? '',
             strtoupper($address?->getState() ?? $destination?->getState() ?? 'IT'),
-            $parameters['iban_beneficiario'] ?? '',
+            $deadline->iban ?? $parameters['iban_beneficiario'] ?? $invoice?->getIban() ?? '',
             $parameters['bic_bank_code'] ?? '',
             $parameters['bic_country_code'] ?? '',
             $parameters['bic_location_code'] ?? '',

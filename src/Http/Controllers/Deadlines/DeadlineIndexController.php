@@ -24,6 +24,6 @@ class DeadlineIndexController extends DeadlineCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('invoice')->get();
+        return $this->getModelClass()::exported()->with('invoice')->get();
     }
 }

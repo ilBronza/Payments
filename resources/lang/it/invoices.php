@@ -24,5 +24,6 @@ return [
 
 	'alreadyExported' => 'Le seguenti fatture sono già state esportate: :names',
 	'noIdsProvided' => 'Nessun ID fattura fornito',
-	'mySelfDescription.orderrows' => 'Distinte'
+	'mySelfDescription.orderrows' => 'Distinte',
+	'exportBankTransfers' => 'Esporta bonifici'
 ];

@@ -2,6 +2,7 @@
 
 namespace IlBronza\Payments\Models;
 
+use Auth;
 use Carbon\Carbon;
 use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use IlBronza\Clients\Models\Client;
@@ -543,7 +544,26 @@ public function getNameDateString() : string
 	if(! $this->date)
 		return $this->name;
 
-	return "{$this->name} - {$this->date->format('d-m-Y')}";
+	return "{$this->date->format('d-m-Y')} - {$this->name}";
 }
 
+public function checkExportation()
+{
+	if(! $this->deadlines)
+		return ;
+
+	foreach($this->deadlines as $deadline)
+		if(! $deadline->hasBeenExported())
+			return;
+
+	$this->marAsExported();
+}
+
+public function marAsExported()
+{
+    $this->exported_at = Carbon::now();
+    $this->exported_by = Auth::id();
+
+    $this->save();	
+}
 }

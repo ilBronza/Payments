@@ -2,7 +2,7 @@
 
 namespace IlBronza\Payments\Http\Controllers\Invoices;
 
-use Barryvdh\DomPDF\Facade\Pdf;
+use IlBronza\Payments\Helpers\InvoicePdfHelper;
 
 class InvoiceGeneratePdfController extends InvoiceCRUD
 {
@@ -18,26 +18,12 @@ class InvoiceGeneratePdfController extends InvoiceCRUD
             'details',
         ])->findOrFail($invoice);
 
-        $filename = 'fattura_' . ($invoice->name ?? $invoice->getKey()) . '.pdf';
+        $path = InvoicePdfHelper::getOrCreateInvoicePdf($invoice);
 
-        if (!empty($invoice->attachment)) {
-            $content = base64_decode($invoice->attachment, true) ?: $invoice->attachment;
-
-            if (str_starts_with($content, '%PDF')) {
-                return response($content, 200, [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="' . $filename . '"',
-                ]);
-            }
+        if (! $path) {
+            abort(500, 'Impossibile generare il PDF della fattura');
         }
 
-        $pdf = Pdf::loadView('payments::invoices.pdf', [
-            'invoice' => $invoice,
-        ]);
-
-        $pdf->set_option('isRemoteEnabled', true);
-        $pdf->setPaper('a4', 'portrait');
-
-        return $pdf->stream($filename);
+        return response()->file($path);
     }
 }

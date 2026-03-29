@@ -44,6 +44,7 @@ Route::group([
 	Route::group(['prefix' => 'deadlines'], function()
 	{
 		Route::get('export-bank-transfers', [Payments::getController('deadline', 'exportBankTransefers'), 'index'])->name('deadlines.exportBankTransefersIndex');
+
 		//DeadlineExportCsvController
 		Route::post('export-csv', [Payments::getController('deadline', 'exportCsv'), 'exportCsv'])->name('deadlines.exportCsv');
 
