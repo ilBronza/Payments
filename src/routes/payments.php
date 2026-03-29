@@ -3,7 +3,7 @@
 use IlBronza\Payments\Payments;
 
 Route::group([
-	'middleware' => ['web', 'auth'],
+	'middleware' => ['web', 'auth', 'payments.roles'],
 	'prefix' => 'payments-manager',
 	'as' => config('payments.routePrefix')
 ], function()

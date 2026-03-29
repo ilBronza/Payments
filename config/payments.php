@@ -56,6 +56,15 @@ return [
 
     'routePrefix' => 'ibPayments',
 
+    'defaultRoles' => [
+        'superadmin',
+        'administrator',
+        'payments',
+    ],
+
+    'routeRoles' => [
+    ],
+
 	'invoice' => [
 		'defaults' => [
 			'company_name' => '',

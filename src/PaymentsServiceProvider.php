@@ -3,6 +3,7 @@
 namespace IlBronza\Payments;
 
 use IlBronza\CRUD\Traits\IlBronzaPackages\IlBronzaServiceProviderPackagesTrait;
+use IlBronza\Payments\Http\Middleware\PaymentsMiddlewareRolesPermissions;
 use Illuminate\Support\ServiceProvider;
 
 class PaymentsServiceProvider extends ServiceProvider
@@ -23,6 +24,8 @@ class PaymentsServiceProvider extends ServiceProvider
 
         if (app() instanceof \Illuminate\Foundation\Application)
             $this->loadRoutesFrom(__DIR__.'/routes/payments.php');
+
+        $this->app['router']->aliasMiddleware('payments.roles', PaymentsMiddlewareRolesPermissions::class);
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
