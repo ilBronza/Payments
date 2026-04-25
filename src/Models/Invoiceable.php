@@ -28,7 +28,7 @@ class Invoiceable extends MorphPivot
 	static $packageConfigPrefix = 'payments';
 	static $modelConfigPrefix = 'invoiceable';
 
-	public $deletingRelationships = [];
+	static $deletingRelationships = [];
 	protected $keyType = 'string';
 
 	public function invoice()
