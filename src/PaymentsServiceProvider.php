@@ -23,7 +23,7 @@ class PaymentsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         if (app() instanceof \Illuminate\Foundation\Application)
-            $this->loadRoutesFrom(__DIR__.'/routes/payments.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/payments.php');
 
         $this->app['router']->aliasMiddleware('payments.roles', PaymentsMiddlewareRolesPermissions::class);
 
