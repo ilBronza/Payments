@@ -1,5 +1,9 @@
 <?php
 
+use IlBronza\Payments\Http\Controllers\Banks\BankController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitController;
+use IlBronza\Payments\Http\Controllers\Cards\CardController;
+use IlBronza\Payments\Http\Controllers\Cardtypes\CardtypeController;
 use IlBronza\Payments\Http\Controllers\Deadlines\DeadlineCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Deadlines\DeadlineDestroyController;
 use IlBronza\Payments\Http\Controllers\Deadlines\DeadlineEditUpdateController;
@@ -21,9 +25,17 @@ use IlBronza\Payments\Http\Controllers\Invoices\InvoiceGeneratePdfController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceIndexController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\DeadlineFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardcircuitFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardtypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardcircuitCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardtypeCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\DeadlineShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowFieldsetsParameters;
@@ -42,6 +54,10 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeDestroyController
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
+use IlBronza\Payments\Models\Bank;
+use IlBronza\Payments\Models\Card;
+use IlBronza\Payments\Models\Cardcircuit;
+use IlBronza\Payments\Models\Cardtype;
 use IlBronza\Payments\Models\Deadline;
 use IlBronza\Payments\Models\Invoice;
 use IlBronza\Payments\Models\InvoiceDetail;
@@ -79,6 +95,90 @@ return [
 	],
 
 	'models' => [
+        'card' => [
+            'table' => 'payments__cards',
+            'class' => Card::class,
+            'fieldsGroupsFiles' => [
+                'index' => CardFieldsGroupParametersFile::class,
+            ],
+            'parametersFiles' => [
+                'create' => CardCreateStoreFieldsetsParameters::class,
+                'show' => CardCreateStoreFieldsetsParameters::class,
+                'edit' => CardCreateStoreFieldsetsParameters::class,
+            ],
+            'controllers' => [
+                'index' => CardController::class,
+                'create' => CardController::class,
+                'store' => CardController::class,
+                'show' => CardController::class,
+                'edit' => CardController::class,
+                'update' => CardController::class,
+                'destroy' => CardController::class,
+            ],
+        ],
+        'cardtype' => [
+            'table' => 'payments__cardtypes',
+            'class' => Cardtype::class,
+            'fieldsGroupsFiles' => [
+                'index' => CardtypeFieldsGroupParametersFile::class,
+            ],
+            'parametersFiles' => [
+                'create' => CardtypeCreateStoreFieldsetsParameters::class,
+                'show' => CardtypeCreateStoreFieldsetsParameters::class,
+                'edit' => CardtypeCreateStoreFieldsetsParameters::class,
+            ],
+            'controllers' => [
+                'index' => CardtypeController::class,
+                'create' => CardtypeController::class,
+                'store' => CardtypeController::class,
+                'show' => CardtypeController::class,
+                'edit' => CardtypeController::class,
+                'update' => CardtypeController::class,
+                'destroy' => CardtypeController::class,
+            ],
+        ],
+        'cardcircuit' => [
+            'table' => 'payments__cardcircuits',
+            'class' => Cardcircuit::class,
+            'fieldsGroupsFiles' => [
+                'index' => CardcircuitFieldsGroupParametersFile::class,
+            ],
+            'parametersFiles' => [
+                'create' => CardcircuitCreateStoreFieldsetsParameters::class,
+                'show' => CardcircuitCreateStoreFieldsetsParameters::class,
+                'edit' => CardcircuitCreateStoreFieldsetsParameters::class,
+            ],
+            'controllers' => [
+                'index' => CardcircuitController::class,
+                'create' => CardcircuitController::class,
+                'store' => CardcircuitController::class,
+                'show' => CardcircuitController::class,
+                'edit' => CardcircuitController::class,
+                'update' => CardcircuitController::class,
+                'destroy' => CardcircuitController::class,
+            ],
+        ],
+        'bank' => [
+            'table' => 'payments__banks',
+            'class' => Bank::class,
+            'fieldsGroupsFiles' => [
+                'index' => BankFieldsGroupParametersFile::class,
+            ],
+            'parametersFiles' => [
+                'create' => BankCreateStoreFieldsetsParameters::class,
+                'show' => BankCreateStoreFieldsetsParameters::class,
+                'edit' => BankCreateStoreFieldsetsParameters::class,
+            ],
+            'controllers' => [
+                'index' => BankController::class,
+                'create' => BankController::class,
+                'store' => BankController::class,
+                'show' => BankController::class,
+                'edit' => BankController::class,
+                'update' => BankController::class,
+                'destroy' => BankController::class,
+            ],
+        ],
 		'paymenttype' => [
 			'table' => 'payments__paymenttypes',
 			'class' => Paymenttype::class,

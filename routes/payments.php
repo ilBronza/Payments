@@ -9,6 +9,50 @@ Route::group([
 ], function()
 {
 
+	Route::group(['prefix' => 'cards'], function()
+	{
+		Route::get('', [Payments::getController('card', 'index'), 'index'])->name('cards.index');
+		Route::get('create', [Payments::getController('card', 'create'), 'create'])->name('cards.create');
+		Route::post('', [Payments::getController('card', 'store'), 'store'])->name('cards.store');
+		Route::get('{card}', [Payments::getController('card', 'show'), 'show'])->name('cards.show');
+		Route::get('{card}/edit', [Payments::getController('card', 'edit'), 'edit'])->name('cards.edit');
+		Route::put('{card}', [Payments::getController('card', 'edit'), 'update'])->name('cards.update');
+		Route::delete('{card}/delete', [Payments::getController('card', 'destroy'), 'destroy'])->name('cards.destroy');
+	});
+
+	Route::group(['prefix' => 'cardtypes'], function()
+	{
+		Route::get('', [Payments::getController('cardtype', 'index'), 'index'])->name('cardtypes.index');
+		Route::get('create', [Payments::getController('cardtype', 'create'), 'create'])->name('cardtypes.create');
+		Route::post('', [Payments::getController('cardtype', 'store'), 'store'])->name('cardtypes.store');
+		Route::get('{cardtype}', [Payments::getController('cardtype', 'show'), 'show'])->name('cardtypes.show');
+		Route::get('{cardtype}/edit', [Payments::getController('cardtype', 'edit'), 'edit'])->name('cardtypes.edit');
+		Route::put('{cardtype}', [Payments::getController('cardtype', 'edit'), 'update'])->name('cardtypes.update');
+		Route::delete('{cardtype}/delete', [Payments::getController('cardtype', 'destroy'), 'destroy'])->name('cardtypes.destroy');
+	});
+
+	Route::group(['prefix' => 'cardcircuits'], function()
+	{
+		Route::get('', [Payments::getController('cardcircuit', 'index'), 'index'])->name('cardcircuits.index');
+		Route::get('create', [Payments::getController('cardcircuit', 'create'), 'create'])->name('cardcircuits.create');
+		Route::post('', [Payments::getController('cardcircuit', 'store'), 'store'])->name('cardcircuits.store');
+		Route::get('{cardcircuit}', [Payments::getController('cardcircuit', 'show'), 'show'])->name('cardcircuits.show');
+		Route::get('{cardcircuit}/edit', [Payments::getController('cardcircuit', 'edit'), 'edit'])->name('cardcircuits.edit');
+		Route::put('{cardcircuit}', [Payments::getController('cardcircuit', 'edit'), 'update'])->name('cardcircuits.update');
+		Route::delete('{cardcircuit}/delete', [Payments::getController('cardcircuit', 'destroy'), 'destroy'])->name('cardcircuits.destroy');
+	});
+
+	Route::group(['prefix' => 'banks'], function()
+	{
+		Route::get('', [Payments::getController('bank', 'index'), 'index'])->name('banks.index');
+		Route::get('create', [Payments::getController('bank', 'create'), 'create'])->name('banks.create');
+		Route::post('', [Payments::getController('bank', 'store'), 'store'])->name('banks.store');
+		Route::get('{bank}', [Payments::getController('bank', 'show'), 'show'])->name('banks.show');
+		Route::get('{bank}/edit', [Payments::getController('bank', 'edit'), 'edit'])->name('banks.edit');
+		Route::put('{bank}', [Payments::getController('bank', 'edit'), 'update'])->name('banks.update');
+		Route::delete('{bank}/delete', [Payments::getController('bank', 'destroy'), 'destroy'])->name('banks.destroy');
+	});
+
 	Route::group(['prefix' => 'paymenttypes'], function()
 	{
 		Route::get('', [Payments::getController('paymenttype', 'index'), 'index'])->name('paymenttypes.index');

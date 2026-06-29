@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'base' => 'Anagrafica',
+    'name' => 'Carta',
+    'card' => 'Carta',
+    'cards' => 'Carte',
+    'list' => 'Carte',
+    'index' => 'Carte',
+    'create' => 'Nuova carta',
+    'store' => 'Salva carta',
+    'edit' => 'Modifica carta',
+    'update' => 'Aggiorna carta',
+    'show' => 'Dettaglio carta',
+    'destroy' => 'Elimina carta',
+
+    'cardtype' => 'Tipologia',
+    'cardtype_id' => 'Tipologia',
+    'cardtype_name' => 'Tipologia',
+    'cardcircuit' => 'Circuito',
+    'cardcircuit_id' => 'Circuito',
+    'cardcircuit_name' => 'Circuito',
+    'bank' => 'Banca',
+    'bank_id' => 'Banca',
+    'bank_name' => 'Banca',
+    'plafond' => 'Plafond',
+    'bank_account_number' => 'Conto bancario',
+    'number' => 'Numero',
+    'expiring' => 'Scadenza',
+    'cvv' => 'CVV',
+    'active' => 'Attiva',
+    'notes' => 'Note',
+];
