@@ -79,6 +79,15 @@ class Payments implements RoutedObjectInterface
 
         $paymentsManagerButton->addChild(
             $menu->createButton([
+                'name' => 'cardassignments.list',
+                'icon' => 'list',
+                'text' => 'payments::cardassignments.list',
+                'href' => $this->route('cardAssignments.index')
+            ])
+        );
+
+        $paymentsManagerButton->addChild(
+            $menu->createButton([
                 'name' => 'cardtypes.list',
                 'icon' => 'list',
                 'text' => 'payments::cardtypes.list',

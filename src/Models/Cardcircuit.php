@@ -2,10 +2,15 @@
 
 namespace IlBronza\Payments\Models;
 
+use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cardcircuit extends BasePaymentsModel
 {
+    use CRUDUseUuidTrait;
+
+    protected $keyType = 'string';
+
     static $modelConfigPrefix = 'cardcircuit';
 
     static $deletingRelationships = [];

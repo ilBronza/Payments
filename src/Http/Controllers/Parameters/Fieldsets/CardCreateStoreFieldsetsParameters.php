@@ -16,19 +16,19 @@ class CardCreateStoreFieldsetsParameters extends FieldsetParametersFile
                     'cardtype' => [
                         'type' => 'select',
                         'multiple' => false,
-                        'rules' => 'nullable|integer|exists:' . config('payments.models.cardtype.table') . ',id',
+                        'rules' => 'nullable|uuid|exists:' . config('payments.models.cardtype.table') . ',id',
                         'relation' => 'cardtype',
                     ],
                     'cardcircuit' => [
                         'type' => 'select',
                         'multiple' => false,
-                        'rules' => 'nullable|integer|exists:' . config('payments.models.cardcircuit.table') . ',id',
+                        'rules' => 'nullable|uuid|exists:' . config('payments.models.cardcircuit.table') . ',id',
                         'relation' => 'cardcircuit',
                     ],
                     'bank' => [
                         'type' => 'select',
                         'multiple' => false,
-                        'rules' => 'nullable|integer|exists:' . config('payments.models.bank.table') . ',id',
+                        'rules' => 'nullable|uuid|exists:' . config('payments.models.bank.table') . ',id',
                         'relation' => 'bank',
                     ],
                     'plafond' => ['number' => 'integer|nullable|min:0|max:999999999'],

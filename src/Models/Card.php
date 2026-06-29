@@ -2,10 +2,16 @@
 
 namespace IlBronza\Payments\Models;
 
+use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Card extends BasePaymentsModel
 {
+    use CRUDUseUuidTrait;
+
+    protected $keyType = 'string';
+
     static $modelConfigPrefix = 'card';
 
     static $deletingRelationships = [];
@@ -27,5 +33,15 @@ class Card extends BasePaymentsModel
     public function bank(): BelongsTo
     {
         return $this->belongsTo(Bank::gpc());
+    }
+
+    public function assignments(): HasMany
+    {
+        return $this->hasMany(CardAssignment::gpc());
+    }
+
+    public function getRelatedCardassignmentElements()
+    {
+        return $this->assignments()->with('card', 'holder', 'utilizer')->get();
     }
 }

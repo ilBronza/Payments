@@ -20,6 +20,17 @@ Route::group([
 		Route::delete('{card}/delete', [Payments::getController('card', 'destroy'), 'destroy'])->name('cards.destroy');
 	});
 
+	Route::group(['prefix' => 'cardassignments'], function()
+	{
+		Route::get('', [Payments::getController('cardassignment', 'index'), 'index'])->name('cardAssignments.index');
+		Route::get('create', [Payments::getController('cardassignment', 'create'), 'create'])->name('cardAssignments.create');
+		Route::post('', [Payments::getController('cardassignment', 'store'), 'store'])->name('cardAssignments.store');
+		Route::get('{cardAssignment}', [Payments::getController('cardassignment', 'show'), 'show'])->name('cardAssignments.show');
+		Route::get('{cardAssignment}/edit', [Payments::getController('cardassignment', 'edit'), 'edit'])->name('cardAssignments.edit');
+		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update');
+		Route::delete('{cardAssignment}/delete', [Payments::getController('cardassignment', 'destroy'), 'destroy'])->name('cardAssignments.destroy');
+	});
+
 	Route::group(['prefix' => 'cardtypes'], function()
 	{
 		Route::get('', [Payments::getController('cardtype', 'index'), 'index'])->name('cardtypes.index');
