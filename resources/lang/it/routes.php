@@ -28,6 +28,15 @@ return [
         'update' => 'Aggiorna circuito carta',
         'destroy' => 'Elimina circuito carta',
     ],
+    'ibPaymentscardAssignments' => [
+        'index' => 'Assegnazioni carte',
+        'create' => 'Nuova assegnazione carta',
+        'store' => 'Salva assegnazione carta',
+        'show' => 'Dettaglio assegnazione carta',
+        'edit' => 'Modifica assegnazione carta',
+        'update' => 'Aggiorna assegnazione carta',
+        'destroy' => 'Elimina assegnazione carta',
+    ],
     'ibPaymentsbanks' => [
         'index' => 'Banche',
         'create' => 'Nuova banca',
@@ -79,6 +88,8 @@ return [
     ],
     'ibPaymentspaymentables' => [
         'index' => 'Pagabili',
+        'create' => 'Nuovo pagabile',
+        'store' => 'Salva pagabile',
         'show' => 'Dettaglio pagabile',
         'edit' => 'Modifica pagabile',
         'update' => 'Aggiorna pagabile',
