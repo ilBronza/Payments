@@ -8,7 +8,7 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
 {
     static function getFieldsGroup(): array
     {
-        return [
+        $result = [
             'translationPrefix' => 'payments::cards',
             'fields' => [
                 'mySelfPrimary' => 'primary',
@@ -42,9 +42,17 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
                 ],
                 'number' => 'payments::card.number',
                 'expiring' => 'flat',
+                'cvv' => [
+                    'type' => 'flat',
+                ],
                 'active' => 'boolean',
                 'mySelfDelete' => 'links.delete',
             ],
         ];
+
+        if(! \Auth::user()->hasRole('cardCvv'))
+            unset($result['fields']['card.cvv']);
+
+        return $result;
     }
 }

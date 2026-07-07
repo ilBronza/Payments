@@ -2,11 +2,13 @@
 
 namespace IlBronza\Payments\Http\Controllers\Deadlines;
 
+use IlBronza\CRUD\Traits\CRUDRelationshipTrait;
 use IlBronza\CRUD\Traits\CRUDShowTrait;
 
 class DeadlineShowController extends DeadlineCRUD
 {
     use CRUDShowTrait;
+    use CRUDRelationshipTrait;
 
     public $allowedMethods = ['show'];
 

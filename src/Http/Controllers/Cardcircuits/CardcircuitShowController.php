@@ -2,11 +2,13 @@
 
 namespace IlBronza\Payments\Http\Controllers\Cardcircuits;
 
+use IlBronza\CRUD\Traits\CRUDRelationshipTrait;
 use IlBronza\CRUD\Traits\CRUDShowTrait;
 
 class CardcircuitShowController extends CardcircuitCRUD
 {
     use CRUDShowTrait;
+    use CRUDRelationshipTrait;
 
     public $allowedMethods = ['show'];
 

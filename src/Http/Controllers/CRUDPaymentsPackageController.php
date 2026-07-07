@@ -11,6 +11,7 @@ class CRUDPaymentsPackageController extends CRUD
 {
     use BasePackageTrait;
 
+    public ?bool $updateEditor = false;
     static $packageConfigPrefix = 'payments';
 
     public function getPackageConfigName()
@@ -73,6 +74,7 @@ class CRUDPaymentsPackageController extends CRUD
 
     protected function addCardsPackageCrossEntityIndexButtons(): void
     {
+        return ;
         if (! isset($this->configModelClassName, $this->table)) {
             return;
         }
