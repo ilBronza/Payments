@@ -76,55 +76,58 @@ class Payments implements RoutedObjectInterface
 
         $paymentsManagerButton->addChild($registryButton);
 
-        $registryButton->addChild(
-            $menu->createButton([
-                'name' => 'banks.list',
-                'icon' => 'building',
-                'text' => 'payments::banks.list',
-                'href' => $this->route('banks.index')
-            ])
-        );
+        if(\Auth::user()->hasRole('paymentsManager'))
+        {
+            $registryButton->addChild(
+                $menu->createButton([
+                    'name' => 'banks.list',
+                    'icon' => __('payments::icons.bank'),
+                    'text' => 'payments::banks.list',
+                    'href' => $this->route('banks.index')
+                ])
+            );
+            
+            $registryButton->addChild(
+                $menu->createButton([
+                    'name' => 'cardcircuits.list',
+                    'icon' => __('payments::icons.cardcircuit'),
+                    'text' => 'payments::cardcircuits.list',
+                    'href' => $this->route('cardcircuits.index')
+                ])
+            );
 
-        $registryButton->addChild(
-            $menu->createButton([
-                'name' => 'cardcircuits.list',
-                'icon' => 'list',
-                'text' => 'payments::cardcircuits.list',
-                'href' => $this->route('cardcircuits.index')
-            ])
-        );
+            $registryButton->addChild(
+                $menu->createButton([
+                    'name' => 'bankaccounts.list',
+                    'icon' => __('payments::icons.bankaccount'),
+                    'text' => 'payments::bankaccounts.list',
+                    'href' => $this->route('bankaccounts.index')
+                ])
+            );
 
-        $registryButton->addChild(
-            $menu->createButton([
-                'name' => 'bankaccounts.list',
-                'icon' => 'credit-card',
-                'text' => 'payments::bankaccounts.list',
-                'href' => $this->route('bankaccounts.index')
-            ])
-        );
+            $registryButton->addChild(
+                $menu->createButton([
+                    'name' => 'cardtypes.list',
+                    'icon' => __('payments::icons.cardtype'),
+                    'text' => 'payments::cardtypes.list',
+                    'href' => $this->route('cardtypes.index')
+                ])
+            );
 
-        $registryButton->addChild(
-            $menu->createButton([
-                'name' => 'cardtypes.list',
-                'icon' => 'list',
-                'text' => 'payments::cardtypes.list',
-                'href' => $this->route('cardtypes.index')
-            ])
-        );
-
-        $registryButton->addChild(
-            $menu->createButton([
-                'name' => 'cards.list',
-                'icon' => 'credit-card',
-                'text' => 'payments::cards.list',
-                'href' => $this->route('cards.index')
-            ])
-        );
+            $registryButton->addChild(
+                $menu->createButton([
+                    'name' => 'cards.list',
+                    'icon' => __('payments::icons.card'),
+                    'text' => 'payments::cards.list',
+                    'href' => $this->route('cards.index')
+                ])
+            );
+        }
 
         $registryButton->addChild(
             $menu->createButton([
                 'name' => 'cardassignments.list',
-                'icon' => 'list',
+                'icon' => __('payments::icons.cardassignment'),
                 'text' => 'payments::cardassignments.list',
                 'href' => $this->route('cardAssignments.index')
             ])

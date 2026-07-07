@@ -59,7 +59,10 @@ Route::group([
 			->middleware('role:paymentsManager|cardAssignment');
 		Route::get('{cardAssignment}', [Payments::getController('cardassignment', 'show'), 'show'])->name('cardAssignments.show');
 		Route::get('{cardAssignment}/edit', [Payments::getController('cardassignment', 'edit'), 'edit'])->name('cardAssignments.edit');
-		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update');
+		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
+
 		Route::delete('{cardAssignment}/delete', [Payments::getController('cardassignment', 'destroy'), 'destroy'])->name('cardAssignments.destroy');
 
 		Route::match(['get', 'post', 'patch', 'delete'], 'delete-media/{cardAssignment}/{media}', [

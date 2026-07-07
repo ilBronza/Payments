@@ -36,7 +36,8 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
                     'translatedName' => 'Numero conto',
                 ],
                 'plafond' => [
-                    'type' => 'numbers.price',
+                    // 'type' => 'numbers.price',
+                    'type' => 'editor.price',
                     'width' => '6em'
                 ],
                 'number' => 'payments::card.number',

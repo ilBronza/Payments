@@ -34,7 +34,7 @@ class CardassignmentFieldsGroupParametersFile extends FieldsGroupParametersFile
                 'card.cardtype.name' => 'flat',
                 'card.cardcircuit.name' => 'flat',
                 'card.bankaccount.bank.name' => 'flat',
-                'card.plafond' => 'flat',
+                'card.plafond' => 'numbers.price',
                 'card.bankaccount.account_number' => 'flat',
                 'card.number' => 'flat',
                 'card.expiring' => 'flat',

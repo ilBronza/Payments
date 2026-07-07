@@ -1,20 +1,16 @@
 <?php
 
-use IlBronza\Payments\Http\Controllers\Banks\BankCreateStoreController;
-use IlBronza\Payments\Http\Controllers\Banks\BankDestroyController;
-use IlBronza\Payments\Http\Controllers\Banks\BankEditUpdateController;
-use IlBronza\Payments\Http\Controllers\Banks\BankIndexController;
-use IlBronza\Payments\Http\Controllers\Banks\BankShowController;
+use IlBronza\Payments\Helpers\CardassignmentDownloadContractFilenameHelper;
 use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountDestroyController;
 use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountIndexController;
 use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountShowController;
-use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitCreateStoreController;
-use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitDestroyController;
-use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitEditUpdateController;
-use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitIndexController;
-use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitShowController;
+use IlBronza\Payments\Http\Controllers\Banks\BankCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Banks\BankDestroyController;
+use IlBronza\Payments\Http\Controllers\Banks\BankEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Banks\BankIndexController;
+use IlBronza\Payments\Http\Controllers\Banks\BankShowController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDeleteMediaController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDestroyController;
@@ -24,6 +20,11 @@ use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentHistoryInde
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentIndexController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentReassignController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentShowController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitDestroyController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitIndexController;
+use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitShowController;
 use IlBronza\Payments\Http\Controllers\Cards\CardCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Cards\CardDestroyController;
 use IlBronza\Payments\Http\Controllers\Cards\CardEditUpdateController;
@@ -56,9 +57,9 @@ use IlBronza\Payments\Http\Controllers\Invoices\InvoiceIndexController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankaccountFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardassignmentFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardcircuitFieldsGroupParametersFile;
-use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardtypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\DeadlineFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupParametersFile;
@@ -66,9 +67,10 @@ use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGr
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankaccountCreateStoreFieldsetsParameters;
-use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardassignmentCreateStoreFieldsetsParameters;
-use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardcircuitCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardassignmentCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardassignmentEditUpdateFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardcircuitCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardtypeCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\DeadlineShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceShowFieldsetsParameters;
@@ -89,7 +91,6 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeDestroyController
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
-use IlBronza\Payments\Helpers\CardassignmentDownloadContractFilenameHelper;
 use IlBronza\Payments\Models\Bank;
 use IlBronza\Payments\Models\Bankaccount;
 use IlBronza\Payments\Models\Card;
@@ -175,8 +176,8 @@ return [
             ],
             'parametersFiles' => [
                 'create' => CardassignmentCreateStoreFieldsetsParameters::class,
-                'show' => CardassignmentCreateStoreFieldsetsParameters::class,
-                'edit' => CardassignmentCreateStoreFieldsetsParameters::class,
+                'show' => CardassignmentEditUpdateFieldsetsParameters::class,
+                'edit' => CardassignmentEditUpdateFieldsetsParameters::class,
             ],
             'controllers' => [
                 'index' => CardassignmentIndexController::class,

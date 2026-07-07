@@ -2,12 +2,15 @@
 
 namespace IlBronza\Payments\Http\Controllers;
 
+use Auth;
 use IlBronza\Buttons\Button;
 use IlBronza\CRUD\CRUD;
-use Auth;
+use IlBronza\CRUD\Http\Controllers\BasePackageTrait;
 
 class CRUDPaymentsPackageController extends CRUD
 {
+    use BasePackageTrait;
+
     static $packageConfigPrefix = 'payments';
 
     public function getPackageConfigName()
@@ -33,37 +36,32 @@ class CRUDPaymentsPackageController extends CRUD
             'card' => [
                 'route' => "{$prefix}cards.index",
                 'text' => 'payments::cards.list',
-                'icon' => 'credit-card',
             ],
             'cardassignment' => [
                 'route' => "{$prefix}cardAssignments.index",
                 'text' => 'payments::cardassignments.list',
-                'icon' => 'list',
             ],
             'cardtype' => [
                 'route' => "{$prefix}cardtypes.index",
                 'text' => 'payments::cardtypes.list',
-                'icon' => 'list',
             ],
             'cardcircuit' => [
                 'route' => "{$prefix}cardcircuits.index",
                 'text' => 'payments::cardcircuits.list',
-                'icon' => 'list',
             ],
             'bank' => [
                 'route' => "{$prefix}banks.index",
                 'text' => 'payments::banks.list',
-                'icon' => 'building',
             ],
             'bankaccount' => [
                 'route' => "{$prefix}bankaccounts.index",
                 'text' => 'payments::bankaccounts.list',
-                'icon' => 'credit-card',
             ],
         ];
 
         if(! Auth::user()->hasRole('cardCreation'))
         {
+            unset($result['card']);
             unset($result['cardtype']);
             unset($result['cardcircuit']);
             unset($result['bank']);
@@ -87,7 +85,7 @@ class CRUDPaymentsPackageController extends CRUD
             $button = Button::create([
                 'href' => route($parameters['route']),
                 'text' => __($parameters['text']),
-                'icon' => $parameters['icon'],
+                'icon' => __("payments::icons.{$modelKey}"),
             ]);
 
             $button->setHtmlClass('uk-margin-small-right');

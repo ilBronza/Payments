@@ -2,11 +2,13 @@
 
 namespace IlBronza\Payments\Http\Controllers\Bankaccounts;
 
+use IlBronza\CRUD\Traits\CRUDRelationshipTrait;
 use IlBronza\CRUD\Traits\CRUDShowTrait;
 
 class BankaccountShowController extends BankaccountCRUD
 {
     use CRUDShowTrait;
+    use CRUDRelationshipTrait;
 
     public $allowedMethods = ['show'];
 
