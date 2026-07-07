@@ -24,7 +24,7 @@ class BankIndexController extends BankCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::withCount('cards')->get();
+        return $this->getModelClass()::withCount('bankaccounts')->get();
     }
 
     public function addIndexButtons()

@@ -24,7 +24,7 @@ class CardassignmentIndexController extends CardassignmentCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('card', 'holder', 'utilizer')->get();
+        return $this->getModelClass()::with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')->get();
     }
 
     public function addIndexButtons()

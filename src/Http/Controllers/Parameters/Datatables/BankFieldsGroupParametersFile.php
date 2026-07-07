@@ -15,7 +15,7 @@ class BankFieldsGroupParametersFile extends FieldsGroupParametersFile
                 'mySelfEdit' => 'links.edit',
                 'mySelfSee' => 'links.see',
                 'name' => 'flat',
-                'cards_count' => 'flat',
+                'bankaccounts_count' => 'flat',
                 'mySelfDelete' => 'links.delete',
             ],
         ];

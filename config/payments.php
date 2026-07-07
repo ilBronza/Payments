@@ -5,6 +5,11 @@ use IlBronza\Payments\Http\Controllers\Banks\BankDestroyController;
 use IlBronza\Payments\Http\Controllers\Banks\BankEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Banks\BankIndexController;
 use IlBronza\Payments\Http\Controllers\Banks\BankShowController;
+use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountDestroyController;
+use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountIndexController;
+use IlBronza\Payments\Http\Controllers\Bankaccounts\BankaccountShowController;
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitDestroyController;
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitEditUpdateController;
@@ -14,6 +19,7 @@ use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentCreateStore
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDestroyController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentIndexController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentReassignController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentShowController;
 use IlBronza\Payments\Http\Controllers\Cards\CardCreateStoreController;
 use IlBronza\Payments\Http\Controllers\Cards\CardDestroyController;
@@ -46,6 +52,7 @@ use IlBronza\Payments\Http\Controllers\Invoices\InvoiceGeneratePdfController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceIndexController;
 use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankaccountFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardassignmentFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardcircuitFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardFieldsGroupParametersFile;
@@ -55,6 +62,7 @@ use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupP
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankCreateStoreFieldsetsParameters;
+use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankaccountCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardassignmentCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardcircuitCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\CardCreateStoreFieldsetsParameters;
@@ -79,6 +87,7 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateControl
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
 use IlBronza\Payments\Models\Bank;
+use IlBronza\Payments\Models\Bankaccount;
 use IlBronza\Payments\Models\Card;
 use IlBronza\Payments\Models\CardAssignment;
 use IlBronza\Payments\Models\Cardcircuit;
@@ -104,6 +113,12 @@ return [
     ],
 
     'routeRoles' => [
+    ],
+
+    'datatableFieldWidths' => [
+        'links' => [
+            'datatableFieldConfirm' => 'auto'
+        ]
     ],
 
 	'invoice' => [
@@ -160,6 +175,7 @@ return [
                 'create' => CardassignmentCreateStoreController::class,
                 'store' => CardassignmentCreateStoreController::class,
                 'show' => CardassignmentShowController::class,
+                'reassign' => CardassignmentReassignController::class,
                 'edit' => CardassignmentEditUpdateController::class,
                 'update' => CardassignmentEditUpdateController::class,
                 'destroy' => CardassignmentDestroyController::class,
@@ -226,6 +242,27 @@ return [
                 'edit' => BankEditUpdateController::class,
                 'update' => BankEditUpdateController::class,
                 'destroy' => BankDestroyController::class,
+            ],
+        ],
+        'bankaccount' => [
+            'table' => 'payments__bankaccounts',
+            'class' => Bankaccount::class,
+            'fieldsGroupsFiles' => [
+                'index' => BankaccountFieldsGroupParametersFile::class,
+            ],
+            'parametersFiles' => [
+                'create' => BankaccountCreateStoreFieldsetsParameters::class,
+                'show' => BankaccountCreateStoreFieldsetsParameters::class,
+                'edit' => BankaccountCreateStoreFieldsetsParameters::class,
+            ],
+            'controllers' => [
+                'index' => BankaccountIndexController::class,
+                'create' => BankaccountCreateStoreController::class,
+                'store' => BankaccountCreateStoreController::class,
+                'show' => BankaccountShowController::class,
+                'edit' => BankaccountEditUpdateController::class,
+                'update' => BankaccountEditUpdateController::class,
+                'destroy' => BankaccountDestroyController::class,
             ],
         ],
 		'paymenttype' => [

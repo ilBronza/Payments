@@ -15,6 +15,8 @@ return [
 	'cardcircuits' => 'Circuiti carte',
 	'bank' => 'Banca',
 	'banks' => 'Banche',
+	'bankaccount' => 'Conto bancario',
+	'bankaccounts' => 'Conti bancari',
 	'paymenttype' => 'Tipo pagamento',
 	'paymenttypes' => 'Tipi pagamento',
 	'paymenttime' => 'Tempo pagamento',
@@ -33,5 +35,7 @@ return [
 	'payments' => 'Pagamenti',
 	'paymentstatus' => 'Stato pagamento',
 	'paymentstatuses' => 'Stati pagamento',
-	'paymentsManager' => 'Gestione pagamenti'
+	'paymentsManager' => 'Gestione pagamenti',
+	'registry' => 'Anagrafica',
+	'bankAccountsAndCards' => 'Conti e carte'
 ];

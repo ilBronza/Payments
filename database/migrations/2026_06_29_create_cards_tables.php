@@ -43,7 +43,7 @@ return new class extends Migration
             $table->uuid('bank_id')->nullable();
             $table->foreign('bank_id')->references('id')->on(config('payments.models.bank.table'));
 
-            $table->unsignedInteger('plafond')->nullable();
+            $table->decimal('plafond', 12, 2)->nullable();
             $table->string('bank_account_number')->nullable();
             $table->string('number')->nullable();
             $table->string('expiring')->nullable();

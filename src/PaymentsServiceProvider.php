@@ -4,7 +4,9 @@ namespace IlBronza\Payments;
 
 use IlBronza\CRUD\Traits\IlBronzaPackages\IlBronzaServiceProviderPackagesTrait;
 use IlBronza\Payments\Http\Middleware\PaymentsMiddlewareRolesPermissions;
+use IlBronza\Payments\Rules\CreditCardNumber;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentsServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,8 @@ class PaymentsServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'payments');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        $this->registerValidationRules();
+
         if (app() instanceof \Illuminate\Foundation\Application)
             $this->loadRoutesFrom(__DIR__.'/../routes/payments.php');
 
@@ -31,6 +35,15 @@ class PaymentsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+    }
+
+    protected function registerValidationRules(): void
+    {
+        Validator::extend(
+            'credit_card_number',
+            fn($attribute, $value) => CreditCardNumber::passes($value),
+            CreditCardNumber::MESSAGE
+        );
     }
 
     /**

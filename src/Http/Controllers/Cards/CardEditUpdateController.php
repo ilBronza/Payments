@@ -11,11 +11,6 @@ class CardEditUpdateController extends CardCRUD
 
     public $allowedMethods = ['edit', 'update'];
 
-    public function getGenericParametersFile(): ?string
-    {
-        return config('payments.models.card.parametersFiles.edit');
-    }
-
     public function edit(string $card)
     {
         $card = $this->findModel($card);

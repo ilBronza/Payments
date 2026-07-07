@@ -9,6 +9,8 @@ class CardassignmentEditUpdateController extends CardassignmentCRUD
 {
     use CRUDEditUpdateTrait;
 
+    public ?bool $updateEditor = false;
+
     public $allowedMethods = ['edit', 'update'];
 
     public function getGenericParametersFile(): ?string

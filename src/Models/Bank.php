@@ -15,8 +15,8 @@ class Bank extends BasePaymentsModel
 
     static $deletingRelationships = [];
 
-    public function cards(): HasMany
+    public function bankaccounts(): HasMany
     {
-        return $this->hasMany(Card::gpc());
+        return $this->hasMany(Bankaccount::gpc());
     }
 }

@@ -23,12 +23,19 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
                     'type' => 'flat',
                     'translatedName' => 'Circuito',
                 ],
-                'bank.name' => [
+                'bankaccount.bank.name' => [
                     'type' => 'flat',
                     'translatedName' => 'Banca',
                 ],
+                'bankaccount.iban' => [
+                    'type' => 'flat',
+                    'translatedName' => 'IBAN',
+                ],
+                'bankaccount.account_number' => [
+                    'type' => 'flat',
+                    'translatedName' => 'Numero conto',
+                ],
                 'plafond' => 'flat',
-                'bank_account_number' => 'flat',
                 'number' => 'flat',
                 'expiring' => 'flat',
                 'active' => 'boolean',

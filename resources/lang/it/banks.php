@@ -13,5 +13,5 @@ return [
     'update' => 'Aggiorna banca',
     'show' => 'Dettaglio banca',
     'destroy' => 'Elimina banca',
-    'cards_count' => 'Carte',
+    'bankaccounts_count' => 'Conti bancari',
 ];

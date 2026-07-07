@@ -30,9 +30,9 @@ class Card extends BasePaymentsModel
         return $this->belongsTo(Cardcircuit::gpc());
     }
 
-    public function bank(): BelongsTo
+    public function bankaccount(): BelongsTo
     {
-        return $this->belongsTo(Bank::gpc());
+        return $this->belongsTo(Bankaccount::gpc());
     }
 
     public function assignments(): HasMany
@@ -42,6 +42,17 @@ class Card extends BasePaymentsModel
 
     public function getRelatedCardassignmentElements()
     {
-        return $this->assignments()->with('card', 'holder', 'utilizer')->get();
+        return $this->assignments()->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')->get();
+    }
+
+    static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model)
+        {
+            if(! $model->name)
+                $model->name = $model->number . ' - ' . $model->bankAccount?->bank?->name;
+        });
     }
 }

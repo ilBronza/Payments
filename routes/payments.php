@@ -25,6 +25,9 @@ Route::group([
 		Route::get('', [Payments::getController('cardassignment', 'index'), 'index'])->name('cardAssignments.index');
 		Route::get('create', [Payments::getController('cardassignment', 'create'), 'create'])->name('cardAssignments.create');
 		Route::post('', [Payments::getController('cardassignment', 'store'), 'store'])->name('cardAssignments.store');
+
+		//CardassignmentReassignController
+		Route::get('{cardAssignment}/reassign', [Payments::getController('cardassignment', 'reassign'), 'reassign'])->name('cardAssignments.reassign');
 		Route::get('{cardAssignment}', [Payments::getController('cardassignment', 'show'), 'show'])->name('cardAssignments.show');
 		Route::get('{cardAssignment}/edit', [Payments::getController('cardassignment', 'edit'), 'edit'])->name('cardAssignments.edit');
 		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update');
@@ -62,6 +65,17 @@ Route::group([
 		Route::get('{bank}/edit', [Payments::getController('bank', 'edit'), 'edit'])->name('banks.edit');
 		Route::put('{bank}', [Payments::getController('bank', 'edit'), 'update'])->name('banks.update');
 		Route::delete('{bank}/delete', [Payments::getController('bank', 'destroy'), 'destroy'])->name('banks.destroy');
+	});
+
+	Route::group(['prefix' => 'bankaccounts'], function()
+	{
+		Route::get('', [Payments::getController('bankaccount', 'index'), 'index'])->name('bankaccounts.index');
+		Route::get('create', [Payments::getController('bankaccount', 'create'), 'create'])->name('bankaccounts.create');
+		Route::post('', [Payments::getController('bankaccount', 'store'), 'store'])->name('bankaccounts.store');
+		Route::get('{bankaccount}', [Payments::getController('bankaccount', 'show'), 'show'])->name('bankaccounts.show');
+		Route::get('{bankaccount}/edit', [Payments::getController('bankaccount', 'edit'), 'edit'])->name('bankaccounts.edit');
+		Route::put('{bankaccount}', [Payments::getController('bankaccount', 'edit'), 'update'])->name('bankaccounts.update');
+		Route::delete('{bankaccount}/delete', [Payments::getController('bankaccount', 'destroy'), 'destroy'])->name('bankaccounts.destroy');
 	});
 
 	Route::group(['prefix' => 'paymenttypes'], function()

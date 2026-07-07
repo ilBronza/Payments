@@ -4,6 +4,7 @@ namespace IlBronza\Payments\Http\Controllers;
 
 use IlBronza\Buttons\Button;
 use IlBronza\CRUD\CRUD;
+use Auth;
 
 class CRUDPaymentsPackageController extends CRUD
 {
@@ -28,7 +29,7 @@ class CRUDPaymentsPackageController extends CRUD
     {
         $prefix = config('payments.routePrefix');
 
-        return [
+        $result = [
             'card' => [
                 'route' => "{$prefix}cards.index",
                 'text' => 'payments::cards.list',
@@ -54,7 +55,22 @@ class CRUDPaymentsPackageController extends CRUD
                 'text' => 'payments::banks.list',
                 'icon' => 'building',
             ],
+            'bankaccount' => [
+                'route' => "{$prefix}bankaccounts.index",
+                'text' => 'payments::bankaccounts.list',
+                'icon' => 'credit-card',
+            ],
         ];
+
+        if(! Auth::user()->hasRole('cardCreation'))
+        {
+            unset($result['cardtype']);
+            unset($result['cardcircuit']);
+            unset($result['bank']);
+            unset($result['bankaccount']);
+        }
+
+        return $result;
     }
 
     protected function addCardsPackageCrossEntityIndexButtons(): void
