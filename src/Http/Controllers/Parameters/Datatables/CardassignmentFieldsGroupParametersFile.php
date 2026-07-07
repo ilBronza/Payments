@@ -25,6 +25,12 @@ class CardassignmentFieldsGroupParametersFile extends FieldsGroupParametersFile
                     'width' => '12em',
                     // 'confirmMessage' => 'payments::cardassignments.reassign_confirmation',
                 ],
+                'mySelfDownloadContract' => [
+                    'type' => 'links.link',
+                    'function' => 'getDownloadContractUrl',
+                    'textMethod' => 'getDownloadContractText',
+                    'width' => '12em',
+                ],
                 'card.cardtype.name' => 'flat',
                 'card.cardcircuit.name' => 'flat',
                 'card.bankaccount.bank.name' => 'flat',
@@ -46,6 +52,11 @@ class CardassignmentFieldsGroupParametersFile extends FieldsGroupParametersFile
                 ],
                 'starts_at' => 'dates.date',
                 'ends_at' => 'dates.date',
+                'mySelfContractDownload' => [
+                    'type' => 'links.link',
+                    'faIcon' => 'print',
+                    'function' => 'getDownloadContractUrl'
+                ],
                 // 'is_valid' => 'boolean',
                 'mySelfDelete' => 'links.delete',
             ],

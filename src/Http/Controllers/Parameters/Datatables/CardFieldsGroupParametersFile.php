@@ -12,7 +12,7 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
             'translationPrefix' => 'payments::cards',
             'fields' => [
                 'mySelfPrimary' => 'primary',
-                'mySelfEdit' => 'links.edit',
+                // 'mySelfEdit' => 'links.edit',
                 'mySelfSee' => 'links.see',
                 'name' => 'flat',
                 'cardtype.name' => [
@@ -35,8 +35,11 @@ class CardFieldsGroupParametersFile extends FieldsGroupParametersFile
                     'type' => 'flat',
                     'translatedName' => 'Numero conto',
                 ],
-                'plafond' => 'flat',
-                'number' => 'flat',
+                'plafond' => [
+                    'type' => 'numbers.price',
+                    'width' => '6em'
+                ],
+                'number' => 'payments::card.number',
                 'expiring' => 'flat',
                 'active' => 'boolean',
                 'mySelfDelete' => 'links.delete',

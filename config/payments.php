@@ -16,8 +16,11 @@ use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitEditUpdateControl
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitIndexController;
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitShowController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentCreateStoreController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDeleteMediaController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDestroyController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDownloadContractController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentEditUpdateController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentHistoryIndexController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentIndexController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentReassignController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentShowController;
@@ -86,6 +89,7 @@ use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeDestroyController
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeIndexController;
 use IlBronza\Payments\Http\Controllers\Paymenttypes\PaymenttypeShowController;
+use IlBronza\Payments\Helpers\CardassignmentDownloadContractFilenameHelper;
 use IlBronza\Payments\Models\Bank;
 use IlBronza\Payments\Models\Bankaccount;
 use IlBronza\Payments\Models\Card;
@@ -110,14 +114,15 @@ return [
         'superadmin',
         'administrator',
         'payments',
-    ],
-
-    'routeRoles' => [
+        'paymentsManager',
     ],
 
     'datatableFieldWidths' => [
         'links' => [
             'datatableFieldConfirm' => 'auto'
+        ],
+        'card' => [
+            'datatableFieldNumber' => 'auto'
         ]
     ],
 
@@ -162,6 +167,9 @@ return [
         'cardassignment' => [
             'table' => 'payments__cardassignments',
             'class' => CardAssignment::class,
+            'helpers' => [
+                'downloadContractFilename' => CardassignmentDownloadContractFilenameHelper::class,
+            ],
             'fieldsGroupsFiles' => [
                 'index' => CardassignmentFieldsGroupParametersFile::class,
             ],
@@ -172,9 +180,12 @@ return [
             ],
             'controllers' => [
                 'index' => CardassignmentIndexController::class,
+                'history' => CardassignmentHistoryIndexController::class,
                 'create' => CardassignmentCreateStoreController::class,
                 'store' => CardassignmentCreateStoreController::class,
                 'show' => CardassignmentShowController::class,
+                'downloadContract' => CardassignmentDownloadContractController::class,
+                'deleteMedia' => CardassignmentDeleteMediaController::class,
                 'reassign' => CardassignmentReassignController::class,
                 'edit' => CardassignmentEditUpdateController::class,
                 'update' => CardassignmentEditUpdateController::class,

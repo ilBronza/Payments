@@ -7,6 +7,8 @@ return [
     'cardassignments' => 'Assegnazioni carte',
     'list' => 'Assegnazioni carte',
     'index' => 'Assegnazioni carte',
+    'history' => 'Storico assegnazioni',
+    'currentAssignments' => 'Assegnazioni attive',
     'create' => 'Nuova assegnazione carta',
     'store' => 'Salva assegnazione carta',
     'edit' => 'Modifica assegnazione carta',
@@ -14,6 +16,7 @@ return [
     'show' => 'Dettaglio assegnazione carta',
     'destroy' => 'Elimina assegnazione carta',
     'reassign' => 'Riassegna',
+    'download_contract' => 'Scarica contratto',
     'reassign_confirmation' => 'La data di fine carta verrà impostata alla data attuale se non già presente e passata',
 
     'card.cardtype.name' => 'Tipologia',
@@ -38,8 +41,11 @@ return [
     'ends_at' => 'Fine Assegnazione',
 
     'is_expired' => 'Scaduta',
+    'signed_contract_file' => 'Contratto',
 
 
     'mySelfReassign' => 'Riassegnazione',
+    'mySelfDownloadContract' => 'Contratto',
     'cardTitleCreate' => 'Crea assgnazione Carta',
+    'mySelfContractDownload' => 'Scarica'
 ];

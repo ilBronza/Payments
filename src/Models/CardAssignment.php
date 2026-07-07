@@ -3,12 +3,15 @@
 namespace IlBronza\Payments\Models;
 
 use Carbon\Carbon;
+use IlBronza\CRUD\Traits\Media\InteractsWithMedia;
 use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use IlBronza\Operators\Models\Operator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
 
-class CardAssignment extends BasePaymentsModel
+class CardAssignment extends BasePaymentsModel implements HasMedia
 {
+    use InteractsWithMedia;
     use CRUDUseUuidTrait;
 
     protected $keyType = 'string';
@@ -44,6 +47,13 @@ class CardAssignment extends BasePaymentsModel
         ]);
     }
 
+    public function getDownloadContractUrl(): string
+    {
+        return route(config('payments.routePrefix') . 'cardAssignments.downloadContract', [
+            'cardAssignment' => $this,
+        ]);
+    }
+
     public function isValid() : bool
     {
         return $this->is_valid;
@@ -67,8 +77,49 @@ class CardAssignment extends BasePaymentsModel
         return false;
     }
 
+    public function scopeNotExpired($query)
+    {
+        $query->where(function($_query)
+        {
+            $_query->whereNull('ends_at');
+            $_query->orWhere('ends_at', '>', Carbon::now());
+        });
+    }
+
+    public function scopeExpired($query)
+    {
+        $query->whereNotNull('ends_at')
+            ->where('ends_at', '<=', Carbon::now());
+    }
+
     public function getReassignText(): string
     {
         return __('payments::cardassignments.reassign');
+    }
+
+    public function getDownloadContractText(): string
+    {
+        return __('payments::cardassignments.download_contract');
+    }
+
+    static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model)
+        {
+            $query = static::gpc()::notExpired()->where('card_id', $model->card_id);
+
+            $brothers = $query->get();
+
+            foreach($brothers as $brother)
+            {
+                if((! $brother->ends_at)||($model->starts_at < $brother->ends_at))
+                {
+                    $brother->ends_at = $model->starts_at;
+                    $brother->save();
+                }
+            }
+        });
     }
 }

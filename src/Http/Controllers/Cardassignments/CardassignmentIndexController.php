@@ -2,6 +2,7 @@
 
 namespace IlBronza\Payments\Http\Controllers\Cardassignments;
 
+use IlBronza\Buttons\Button;
 use IlBronza\CRUD\Traits\CRUDIndexTrait;
 use IlBronza\CRUD\Traits\CRUDPlainIndexTrait;
 
@@ -24,11 +25,24 @@ class CardassignmentIndexController extends CardassignmentCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')->get();
+        return $this->getModelClass()::query()
+            ->notExpired()
+            ->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')
+            ->get();
     }
 
     public function addIndexButtons()
     {
         $this->addCardsPackageCrossEntityIndexButtons();
+
+        $button = Button::create([
+            'href' => app('payments')->route('cardAssignments.history'),
+            'text' => __('payments::cardassignments.history'),
+            'icon' => 'history',
+        ]);
+
+        $button->setHtmlClass('uk-margin-small-right');
+
+        $this->table->addButton($button);
     }
 }

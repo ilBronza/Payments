@@ -32,6 +32,11 @@ class CardassignmentCreateStoreFieldsetsParameters extends FieldsetParametersFil
                     ],
                     'starts_at' => ['date' => 'date|required'],
                     'ends_at' => ['date' => 'date|nullable|after_or_equal:starts_at'],
+                    'signed_contract_file' => [
+                        'type' => 'file',
+                        'multiple' => false,
+                        'rules' => 'nullable|file|mimes:pdf|max:10240',
+                    ]
                 ],
                 'width' => ['1-3@l', '1-2@m'],
             ],

@@ -30,6 +30,7 @@ return [
     ],
     'ibPaymentscardAssignments' => [
         'index' => 'Assegnazioni carte',
+        'history' => 'Storico assegnazioni',
         'create' => 'Nuova assegnazione carta',
         'store' => 'Salva assegnazione carta',
         'show' => 'Dettaglio assegnazione carta',

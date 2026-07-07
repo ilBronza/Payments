@@ -3,7 +3,12 @@
 use IlBronza\Payments\Payments;
 
 Route::group([
-	'middleware' => ['web', 'auth', 'payments.roles'],
+	'middleware' => [
+		'web',
+		'auth',
+		'payments.roles',
+		'role:paymentsManager'
+	],
 	'prefix' => 'payments-manager',
 	'as' => config('payments.routePrefix')
 ], function()
@@ -22,16 +27,44 @@ Route::group([
 
 	Route::group(['prefix' => 'cardassignments'], function()
 	{
-		Route::get('', [Payments::getController('cardassignment', 'index'), 'index'])->name('cardAssignments.index');
-		Route::get('create', [Payments::getController('cardassignment', 'create'), 'create'])->name('cardAssignments.create');
-		Route::post('', [Payments::getController('cardassignment', 'store'), 'store'])->name('cardAssignments.store');
+		Route::get('', [Payments::getController('cardassignment', 'index'), 'index'])
+			->name('cardAssignments.index')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
+
+		Route::get('create', [Payments::getController('cardassignment', 'create'), 'create'])
+			->name('cardAssignments.create')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
+
+		Route::post('', [Payments::getController('cardassignment', 'store'), 'store'])
+			->name('cardAssignments.store')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
+
+		Route::get('history', [Payments::getController('cardassignment', 'history'), 'index'])
+			->name('cardAssignments.history')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
 
 		//CardassignmentReassignController
-		Route::get('{cardAssignment}/reassign', [Payments::getController('cardassignment', 'reassign'), 'reassign'])->name('cardAssignments.reassign');
+		Route::get('{cardAssignment}/reassign', [Payments::getController('cardassignment', 'reassign'), 'reassign'])
+			->name('cardAssignments.reassign')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
+
+		Route::get('{cardAssignment}/download-contract', [Payments::getController('cardassignment', 'downloadContract'), 'downloadContract'])
+			->name('cardAssignments.downloadContract')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
 		Route::get('{cardAssignment}', [Payments::getController('cardassignment', 'show'), 'show'])->name('cardAssignments.show');
 		Route::get('{cardAssignment}/edit', [Payments::getController('cardassignment', 'edit'), 'edit'])->name('cardAssignments.edit');
 		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update');
 		Route::delete('{cardAssignment}/delete', [Payments::getController('cardassignment', 'destroy'), 'destroy'])->name('cardAssignments.destroy');
+
+		Route::match(['get', 'post', 'patch', 'delete'], 'delete-media/{cardAssignment}/{media}', [
+			Payments::getController('cardassignment', 'deleteMedia'), 'deleteMedia'])->name('cardAssignments.deleteMedia');
+
 	});
 
 	Route::group(['prefix' => 'cardtypes'], function()
