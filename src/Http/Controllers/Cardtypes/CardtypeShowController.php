@@ -17,6 +17,11 @@ class CardtypeShowController extends CardtypeCRUD
         return config('payments.models.cardtype.parametersFiles.show');
     }
 
+    public function getRelationshipsManagerClass()
+    {
+        return config("payments.models.{$this->configModelClassName}.relationshipsManagerClasses.show");
+    }
+
     public function show(string $cardtype)
     {
         $cardtype = $this->findModel($cardtype);

@@ -17,6 +17,11 @@ class CardcircuitShowController extends CardcircuitCRUD
         return config('payments.models.cardcircuit.parametersFiles.show');
     }
 
+    public function getRelationshipsManagerClass()
+    {
+        return config("payments.models.{$this->configModelClassName}.relationshipsManagerClasses.show");
+    }
+
     public function show(string $cardcircuit)
     {
         $cardcircuit = $this->findModel($cardcircuit);

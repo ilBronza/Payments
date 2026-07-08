@@ -11,6 +11,9 @@ class CardRelationManager extends RelationshipsManager
         return [
             'show' => [
                 'relations' => [
+                    'cardtype' => config('payments.models.cardtype.controllers.show'),
+                    'cardcircuit' => config('payments.models.cardcircuit.controllers.show'),
+                    'bankaccount' => config('payments.models.bankaccount.controllers.show'),
                     'assignments' => [
                         'controller' => config('payments.models.cardassignment.controllers.index'),
                         'elementGetterMethod' => 'getRelatedCardassignmentElements',

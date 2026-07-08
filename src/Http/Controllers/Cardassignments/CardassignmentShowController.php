@@ -17,6 +17,11 @@ class CardassignmentShowController extends CardassignmentCRUD
         return config('payments.models.cardassignment.parametersFiles.show');
     }
 
+    public function getRelationshipsManagerClass()
+    {
+        return config("payments.models.{$this->configModelClassName}.relationshipsManagerClasses.show");
+    }
+
     public function show(string $cardassignment)
     {
         $cardassignment = $this->findModel($cardassignment);

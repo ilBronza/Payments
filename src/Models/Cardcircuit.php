@@ -19,4 +19,9 @@ class Cardcircuit extends BasePaymentsModel
     {
         return $this->hasMany(Card::gpc());
     }
+
+    public function getRelatedCardElements()
+    {
+        return $this->cards()->with('cardtype', 'cardcircuit', 'bankaccount.bank')->get();
+    }
 }

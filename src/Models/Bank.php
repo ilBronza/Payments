@@ -19,4 +19,9 @@ class Bank extends BasePaymentsModel
     {
         return $this->hasMany(Bankaccount::gpc());
     }
+
+    public function getRelatedBankaccountElements()
+    {
+        return $this->bankaccounts()->with('bank')->withCount('cards')->get();
+    }
 }

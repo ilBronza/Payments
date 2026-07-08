@@ -17,6 +17,11 @@ class BankaccountShowController extends BankaccountCRUD
         return config('payments.models.bankaccount.parametersFiles.show');
     }
 
+    public function getRelationshipsManagerClass()
+    {
+        return config("payments.models.{$this->configModelClassName}.relationshipsManagerClasses.show");
+    }
+
     public function show(string $bankaccount)
     {
         $bankaccount = $this->findModel($bankaccount);

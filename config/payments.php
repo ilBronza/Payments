@@ -78,6 +78,11 @@ use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowField
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymentableCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymenttypeCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\BankRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\BankaccountRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardassignmentRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardcircuitRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardtypeRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\InvoiceRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymentableRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymenttypeRelationManager;
@@ -179,6 +184,9 @@ return [
                 'show' => CardassignmentEditUpdateFieldsetsParameters::class,
                 'edit' => CardassignmentEditUpdateFieldsetsParameters::class,
             ],
+            'relationshipsManagerClasses' => [
+                'show' => CardassignmentRelationManager::class,
+            ],
             'controllers' => [
                 'index' => CardassignmentIndexController::class,
                 'history' => CardassignmentHistoryIndexController::class,
@@ -204,6 +212,9 @@ return [
                 'show' => CardtypeCreateStoreFieldsetsParameters::class,
                 'edit' => CardtypeCreateStoreFieldsetsParameters::class,
             ],
+            'relationshipsManagerClasses' => [
+                'show' => CardtypeRelationManager::class,
+            ],
             'controllers' => [
                 'index' => CardtypeIndexController::class,
                 'create' => CardtypeCreateStoreController::class,
@@ -224,6 +235,9 @@ return [
                 'create' => CardcircuitCreateStoreFieldsetsParameters::class,
                 'show' => CardcircuitCreateStoreFieldsetsParameters::class,
                 'edit' => CardcircuitCreateStoreFieldsetsParameters::class,
+            ],
+            'relationshipsManagerClasses' => [
+                'show' => CardcircuitRelationManager::class,
             ],
             'controllers' => [
                 'index' => CardcircuitIndexController::class,
@@ -246,6 +260,9 @@ return [
                 'show' => BankCreateStoreFieldsetsParameters::class,
                 'edit' => BankCreateStoreFieldsetsParameters::class,
             ],
+            'relationshipsManagerClasses' => [
+                'show' => BankRelationManager::class,
+            ],
             'controllers' => [
                 'index' => BankIndexController::class,
                 'create' => BankCreateStoreController::class,
@@ -266,6 +283,9 @@ return [
                 'create' => BankaccountCreateStoreFieldsetsParameters::class,
                 'show' => BankaccountCreateStoreFieldsetsParameters::class,
                 'edit' => BankaccountCreateStoreFieldsetsParameters::class,
+            ],
+            'relationshipsManagerClasses' => [
+                'show' => BankaccountRelationManager::class,
             ],
             'controllers' => [
                 'index' => BankaccountIndexController::class,
