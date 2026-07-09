@@ -53,6 +53,7 @@ Route::group([
 			->withoutMiddleware('role:paymentsManager')
 			->middleware('role:paymentsManager|cardAssignment');
 
+		//CardassignmentDownloadContractController
 		Route::get('{cardAssignment}/download-contract', [Payments::getController('cardassignment', 'downloadContract'), 'downloadContract'])
 			->name('cardAssignments.downloadContract')
 			->withoutMiddleware('role:paymentsManager')
