@@ -17,7 +17,7 @@ class CardassignmentDownloadContractController extends CardassignmentCRUD
             'card.bankaccount.bank',
             'card.cardtype',
             'card.cardcircuit',
-            'holder',
+            'card.holder',
             'utilizer',
         ]);
 
@@ -27,7 +27,8 @@ class CardassignmentDownloadContractController extends CardassignmentCRUD
             'cardcircuit' => $cardAssignment->card->cardcircuit,
             'bank' => $cardAssignment->card->bankaccount->bank,
             'bankaccount' => $cardAssignment->card->bankaccount,
-            'holder' => $cardAssignment->holder
+            'holder' => $cardAssignment->card->holder,
+            'utilizer' => $cardAssignment->utilizer,
         ]);
 
         $pdf->setPaper('a4', 'portrait');

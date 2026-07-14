@@ -42,39 +42,13 @@ class CRUDPaymentsPackageController extends CRUD
                 'route' => "{$prefix}cardAssignments.index",
                 'text' => 'payments::cardassignments.list',
             ],
-            'cardtype' => [
-                'route' => "{$prefix}cardtypes.index",
-                'text' => 'payments::cardtypes.list',
-            ],
-            'cardcircuit' => [
-                'route' => "{$prefix}cardcircuits.index",
-                'text' => 'payments::cardcircuits.list',
-            ],
-            'bank' => [
-                'route' => "{$prefix}banks.index",
-                'text' => 'payments::banks.list',
-            ],
-            'bankaccount' => [
-                'route' => "{$prefix}bankaccounts.index",
-                'text' => 'payments::bankaccounts.list',
-            ],
         ];
-
-        if(! Auth::user()->hasRole('cardCreation'))
-        {
-            unset($result['card']);
-            unset($result['cardtype']);
-            unset($result['cardcircuit']);
-            unset($result['bank']);
-            unset($result['bankaccount']);
-        }
 
         return $result;
     }
 
     protected function addCardsPackageCrossEntityIndexButtons(): void
     {
-        return ;
         if (! isset($this->configModelClassName, $this->table)) {
             return;
         }

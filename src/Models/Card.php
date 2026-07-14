@@ -3,6 +3,7 @@
 namespace IlBronza\Payments\Models;
 
 use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
+use IlBronza\Operators\Models\Operator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
@@ -36,14 +37,32 @@ class Card extends BasePaymentsModel
         return $this->belongsTo(Bankaccount::gpc());
     }
 
+    public function holder(): BelongsTo
+    {
+        return $this->belongsTo(Operator::gpc(), 'holder_id');
+    }
+
     public function assignments(): HasMany
     {
         return $this->hasMany(CardAssignment::gpc());
     }
 
+    public function activeAssignments(): HasMany
+    {
+        return $this->assignments()->notExpired();
+    }
+
+    public function getHasActiveAssignmentAttribute() : bool
+    {
+        if(array_key_exists('active_assignments_count', $this->attributes))
+            return ((int) $this->active_assignments_count) > 0;
+
+        return $this->activeAssignments()->exists();
+    }
+
     public function getRelatedCardassignmentElements()
     {
-        return $this->assignments()->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')->get();
+        return $this->assignments()->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'card.holder', 'utilizer')->get();
     }
 
     public function getNameAttribute($value) : string

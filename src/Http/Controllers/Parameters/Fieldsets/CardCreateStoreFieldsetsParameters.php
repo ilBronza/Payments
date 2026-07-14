@@ -13,6 +13,12 @@ class CardCreateStoreFieldsetsParameters extends FieldsetParametersFile
                 'translationPrefix' => 'payments::cards',
                 'fields' => [
                     'name' => ['text' => 'string|required|max:255'],
+                    'holder' => [
+                        'type' => 'select',
+                        'multiple' => false,
+                        'rules' => 'string|required|exists:' . config('operators.models.operator.table') . ',id',
+                        'relation' => 'holder',
+                    ],
                     'cardtype' => [
                         'type' => 'select',
                         'multiple' => false,

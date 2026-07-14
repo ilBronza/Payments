@@ -27,7 +27,7 @@ class CardassignmentIndexController extends CardassignmentCRUD
     {
         return $this->getModelClass()::query()
             ->notExpired()
-            ->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')
+            ->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'card.holder', 'utilizer')
             ->get();
     }
 

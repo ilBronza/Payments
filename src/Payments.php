@@ -113,16 +113,16 @@ class Payments implements RoutedObjectInterface
                     'href' => $this->route('cardtypes.index')
                 ])
             );
-
-            $registryButton->addChild(
-                $menu->createButton([
-                    'name' => 'cards.list',
-                    'icon' => __('payments::icons.card'),
-                    'text' => 'payments::cards.list',
-                    'href' => $this->route('cards.index')
-                ])
-            );
         }
+
+        $registryButton->addChild(
+            $menu->createButton([
+                'name' => 'cards.list',
+                'icon' => __('payments::icons.card'),
+                'text' => 'payments::cards.list',
+                'href' => $this->route('cards.index')
+            ])
+        );
 
         $registryButton->addChild(
             $menu->createButton([

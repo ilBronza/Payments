@@ -14,6 +14,9 @@ return [
     'show' => 'Dettaglio carta',
     'destroy' => 'Elimina carta',
 
+    'holder' => 'Titolare',
+    'holder_id' => 'Titolare',
+    'holder_name' => 'Titolare',
     'cardtype' => 'Tipologia',
     'cardtype_id' => 'Tipologia',
     'cardtype_name' => 'Tipologia',

@@ -12,7 +12,7 @@ class CardassignmentHistoryIndexController extends CardassignmentIndexController
     {
         return $this->getModelClass()::query()
             ->expired()
-            ->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'holder', 'utilizer')
+            ->with('card.bankaccount.bank', 'card.cardtype', 'card.cardcircuit', 'card.holder', 'utilizer')
             ->get();
     }
 

@@ -10,6 +10,6 @@ class CardassignmentDownloadContractFilenameHelper
 {
 	public static function getFilename(CardAssignment $cardAssignment): string
 	{
-		return Str::slug($cardAssignment->holder->getName()) . '_' . $cardAssignment->holder->getFiscalCode() . '_card-assignment_' . Carbon::now()->format('Y-m-d') . '.pdf';
+		return Str::slug($cardAssignment->card->holder->getName()) . '_' . $cardAssignment->card->holder->getFiscalCode() . '_card-assignment_' . Carbon::now()->format('Y-m-d') . '.pdf';
 	}
 }

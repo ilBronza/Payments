@@ -24,7 +24,10 @@ class CardIndexController extends CardCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('cardtype', 'cardcircuit', 'bankaccount.bank')->get();
+        return $this->getModelClass()::query()
+            ->with('holder', 'cardtype', 'cardcircuit', 'bankaccount.bank')
+            ->withCount('activeAssignments')
+            ->get();
     }
 
     public function addIndexButtons()

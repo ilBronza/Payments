@@ -18,12 +18,6 @@ class CardassignmentCreateStoreFieldsetsParameters extends FieldsetParametersFil
                         'rules' => 'string|required|exists:' . config('payments.models.card.table') . ',id',
                         'relation' => 'card',
                     ],
-                    'holder_id' => [
-                        'type' => 'select',
-                        'multiple' => false,
-                        'rules' => 'string|required|exists:' . config('operators.models.operator.table') . ',id',
-                        'relation' => 'holder',
-                    ],
                     'utilizer_id' => [
                         'type' => 'select',
                         'multiple' => false,

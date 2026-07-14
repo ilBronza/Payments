@@ -16,7 +16,10 @@ Route::group([
 
 	Route::group(['prefix' => 'cards'], function()
 	{
-		Route::get('', [Payments::getController('card', 'index'), 'index'])->name('cards.index');
+		Route::get('', [Payments::getController('card', 'index'), 'index'])
+			->name('cards.index')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
 		Route::get('create', [Payments::getController('card', 'create'), 'create'])->name('cards.create');
 		Route::post('', [Payments::getController('card', 'store'), 'store'])->name('cards.store');
 		Route::get('{card}', [Payments::getController('card', 'show'), 'show'])->name('cards.show');

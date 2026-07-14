@@ -58,6 +58,7 @@ use IlBronza\Payments\Http\Controllers\Invoices\InvoiceShowController;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\BankaccountFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardassignmentByCardFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardassignmentFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardcircuitFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardtypeFieldsGroupParametersFile;
@@ -77,9 +78,9 @@ use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceShowFieldsets
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\InvoiceableShowFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymentableCreateStoreFieldsetsParameters;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\PaymenttypeCreateStoreFieldsetsParameters;
-use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\BankRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\BankaccountRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardassignmentRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardcircuitRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardtypeRelationManager;
@@ -121,6 +122,13 @@ return [
         'administrator',
         'payments',
         'paymentsManager',
+    ],
+
+    'routeRoles' => [
+        'ibPaymentscards.index' => [
+            'paymentsManager',
+            'cardAssignment',
+        ],
     ],
 
     'datatableFieldWidths' => [
@@ -178,6 +186,7 @@ return [
             ],
             'fieldsGroupsFiles' => [
                 'index' => CardassignmentFieldsGroupParametersFile::class,
+                'related' => CardassignmentByCardFieldsGroupParametersFile::class,
             ],
             'parametersFiles' => [
                 'create' => CardassignmentCreateStoreFieldsetsParameters::class,

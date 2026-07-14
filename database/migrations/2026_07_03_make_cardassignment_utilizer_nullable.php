@@ -18,13 +18,27 @@ return new class extends Migration
 
     public function down()
     {
-        DB::table(config('payments.models.cardassignment.table'))
-            ->whereNull('utilizer_id')
-            ->update([
-                'utilizer_id' => DB::raw('holder_id'),
-            ]);
+        $cardassignmentsTable = config('payments.models.cardassignment.table');
+        $cardsTable = config('payments.models.card.table');
 
-        Schema::table(config('payments.models.cardassignment.table'), function (Blueprint $table) {
+        if(Schema::hasColumn($cardassignmentsTable, 'holder_id'))
+        {
+            DB::table($cardassignmentsTable)
+                ->whereNull('utilizer_id')
+                ->update([
+                    'utilizer_id' => DB::raw('holder_id'),
+                ]);
+        }
+        elseif(Schema::hasColumn($cardsTable, 'holder_id'))
+        {
+            DB::table($cardassignmentsTable)
+                ->whereNull('utilizer_id')
+                ->update([
+                    'utilizer_id' => DB::raw("(select {$cardsTable}.holder_id from {$cardsTable} where {$cardsTable}.id = {$cardassignmentsTable}.card_id)"),
+                ]);
+        }
+
+        Schema::table($cardassignmentsTable, function (Blueprint $table) {
             $table->dropForeign(['utilizer_id']);
             $table->uuid('utilizer_id')->nullable(false)->change();
             $table->foreign('utilizer_id')->references('id')->on(config('operators.models.operator.table'));

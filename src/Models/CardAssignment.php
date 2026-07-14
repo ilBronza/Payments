@@ -30,11 +30,6 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
         return $this->belongsTo(Card::gpc());
     }
 
-    public function holder(): BelongsTo
-    {
-        return $this->belongsTo(Operator::gpc(), 'holder_id');
-    }
-
     public function utilizer(): BelongsTo
     {
         return $this->belongsTo(Operator::gpc(), 'utilizer_id');

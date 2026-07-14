@@ -29,7 +29,7 @@ return [
         'destroy' => 'Elimina circuito carta',
     ],
     'ibPaymentscardAssignments' => [
-        'index' => 'Assegnazioni carte',
+        'index' => 'Carte assegnate',
         'history' => 'Storico assegnazioni',
         'create' => 'Nuova assegnazione carta',
         'store' => 'Salva assegnazione carta',

@@ -42,7 +42,7 @@ class CardassignmentFieldsGroupParametersFile extends FieldsGroupParametersFile
                     'type' => 'flat',
                 ],
 
-                'holder.name' => [
+                'card.holder.name' => [
                     'type' => 'flat',
                     'translatedName' => 'Titolare',
                 ],

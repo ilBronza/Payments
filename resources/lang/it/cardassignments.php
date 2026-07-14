@@ -4,11 +4,11 @@ return [
     'base' => 'Assegnazione',
     'name' => 'Assegnazione carta',
     'cardassignment' => 'Assegnazione carta',
-    'cardassignments' => 'Assegnazioni carte',
-    'list' => 'Assegnazioni carte',
-    'index' => 'Assegnazioni carte',
+    'cardassignments' => 'Carte assegnate',
+    'list' => 'Carte assegnate',
+    'index' => 'Carte assegnate',
     'history' => 'Storico assegnazioni',
-    'currentAssignments' => 'Assegnazioni attive',
+    'currentAssignments' => 'Carte assegnate',
     'create' => 'Nuova assegnazione carta',
     'store' => 'Salva assegnazione carta',
     'edit' => 'Modifica assegnazione carta',
@@ -20,7 +20,7 @@ return [
     'reassign_confirmation' => 'La data di fine carta verrà impostata alla data attuale se non già presente e passata',
 
     'card.cardtype.name' => 'Tipologia',
-    'card.cardcircuit.name' => 'Ente Gestore',
+    'card.cardcircuit.name' => 'Circuito',
     'card.bankaccount.bank.name' => 'Banca',
     'card.bankaccount.iban' => 'IBAN',
     'card.bankaccount.account_number' => 'Nr C/C Addebito',
@@ -31,9 +31,6 @@ return [
     'card' => 'Carta',
     'card_id' => 'Carta',
     'card_name' => 'Carta',
-    'holder' => 'Titolare',
-    'holder_id' => 'Titolare',
-    'holder_name' => 'Titolare',
     'utilizer' => 'Utilizzatore',
     'utilizer_id' => 'Utilizzatore',
     'utilizer_name' => 'Utilizzatore',
@@ -41,7 +38,7 @@ return [
     'ends_at' => 'Fine Assegnazione',
 
     'is_expired' => 'Scaduta',
-    'signed_contract_file' => 'Contratto',
+    'signed_contract_file' => 'Verbale',
 
 
     'mySelfReassign' => 'Riassegnazione',
