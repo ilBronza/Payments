@@ -2,10 +2,12 @@
 
 namespace IlBronza\Payments\Models;
 
+use Carbon\Carbon;
 use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use IlBronza\Operators\Models\Operator;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Auth;
 
 class Card extends BasePaymentsModel
@@ -50,6 +52,14 @@ class Card extends BasePaymentsModel
     public function activeAssignments(): HasMany
     {
         return $this->assignments()->notExpired();
+    }
+
+    public function currentAssignment(): HasOne
+    {
+        return $this->hasOne(CardAssignment::gpc())
+            ->active()
+            ->where('starts_at', '<=', Carbon::now())
+            ->orderByDesc('starts_at');
     }
 
     public function getHasActiveAssignmentAttribute() : bool
@@ -112,5 +122,10 @@ class Card extends BasePaymentsModel
                 $model->name = $number . ' - ' . $model->bankAccount?->bank?->name;
             }
         });
+    }
+
+    public function getNameForSelect()
+    {
+        return "{$this->number} - {$this->cardtype->getName()}";
     }
 }

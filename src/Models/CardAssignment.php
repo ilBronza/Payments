@@ -30,6 +30,11 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
         return $this->belongsTo(Card::gpc());
     }
 
+    public function getUtilizer() : ? Operator
+    {
+        return $this->utilizer;
+    }
+
     public function utilizer(): BelongsTo
     {
         return $this->belongsTo(Operator::gpc(), 'utilizer_id');
@@ -73,6 +78,11 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
     }
 
     public function scopeNotExpired($query)
+    {
+        return $query->active();
+    }
+
+    public function scopeActive($query)
     {
         $query->where(function($_query)
         {
