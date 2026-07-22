@@ -18,6 +18,7 @@ use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDownloadCon
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentHistoryIndexController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentIndexController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentInlineEditController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentReassignController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentShowController;
 use IlBronza\Payments\Http\Controllers\Cardcircuits\CardcircuitCreateStoreController;
@@ -199,6 +200,7 @@ return [
             'controllers' => [
                 'index' => CardassignmentIndexController::class,
                 'history' => CardassignmentHistoryIndexController::class,
+                'inlineEdit' => CardassignmentInlineEditController::class,
                 'create' => CardassignmentCreateStoreController::class,
                 'store' => CardassignmentCreateStoreController::class,
                 'show' => CardassignmentShowController::class,

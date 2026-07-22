@@ -61,6 +61,10 @@ Route::group([
 			->name('cardAssignments.downloadContract')
 			->withoutMiddleware('role:paymentsManager')
 			->middleware('role:paymentsManager|cardAssignment');
+		Route::get('{cardAssignment}/inline-edit', [Payments::getController('cardassignment', 'inlineEdit'), 'inlineEdit'])
+			->name('cardAssignments.inlineEdit')
+			->withoutMiddleware('role:paymentsManager')
+			->middleware('role:paymentsManager|cardAssignment');
 		Route::get('{cardAssignment}', [Payments::getController('cardassignment', 'show'), 'show'])->name('cardAssignments.show');
 		Route::get('{cardAssignment}/edit', [Payments::getController('cardassignment', 'edit'), 'edit'])->name('cardAssignments.edit');
 		Route::put('{cardAssignment}', [Payments::getController('cardassignment', 'edit'), 'update'])->name('cardAssignments.update')

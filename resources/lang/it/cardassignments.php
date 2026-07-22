@@ -34,8 +34,8 @@ return [
     'utilizer' => 'Utilizzatore',
     'utilizer_id' => 'Utilizzatore',
     'utilizer_name' => 'Utilizzatore',
-    'starts_at' => 'Inizio Assegnazione',
-    'ends_at' => 'Fine Assegnazione',
+    'starts_at' => 'Inizio',
+    'ends_at' => 'Fine',
 
     'is_expired' => 'Scaduta',
     'signed_contract_file' => 'Verbale',

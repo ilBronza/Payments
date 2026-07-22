@@ -47,6 +47,11 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
         ]);
     }
 
+    public function getInlineEditUrl(array $data = []) : string
+    {
+        return $this->getKeyedRoute('inlineEdit', $data);
+    }
+
     public function getDownloadContractUrl(): string
     {
         return route(config('payments.routePrefix') . 'cardAssignments.downloadContract', [
