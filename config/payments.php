@@ -18,6 +18,7 @@ use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentDownloadCon
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentEditUpdateController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentHistoryIndexController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentIndexController;
+use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentInlineCreateController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentInlineEditController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentReassignController;
 use IlBronza\Payments\Http\Controllers\Cardassignments\CardassignmentShowController;
@@ -137,7 +138,7 @@ return [
             'datatableFieldConfirm' => 'auto'
         ],
         'card' => [
-            'datatableFieldNumber' => 'auto'
+            'datatableFieldNumber' => '12em'
         ]
     ],
 
@@ -200,6 +201,7 @@ return [
             'controllers' => [
                 'index' => CardassignmentIndexController::class,
                 'history' => CardassignmentHistoryIndexController::class,
+                'inlineCreate' => CardassignmentInlineCreateController::class,
                 'inlineEdit' => CardassignmentInlineEditController::class,
                 'create' => CardassignmentCreateStoreController::class,
                 'store' => CardassignmentCreateStoreController::class,

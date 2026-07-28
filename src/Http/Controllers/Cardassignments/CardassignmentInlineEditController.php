@@ -11,14 +11,15 @@ class CardassignmentInlineEditController extends CardassignmentCRUD
     public function inlineEdit(string $cardAssignment)
     {
         $cardAssignment = $this->findModel($cardAssignment);
-        $parametersFile = config('payments.models.cardassignment.fieldsGroupsFiles.inlineEdit');
 
-        abort_unless(is_string($parametersFile) && class_exists($parametersFile), 404);
+        $parametersFile = cconfig('payments.models.cardassignment.fieldsGroupsFiles.inlineEdit');
+        $sourceParametersFile = cconfig('payments.models.cardassignment.fieldsGroupsFiles.index');
 
         $table = Datatables::createInlineEditTable(
             'cardassignmentInlineEdit',
             $parametersFile::getTracedFieldsGroup($cardAssignment),
-            $cardAssignment
+            $cardAssignment,
+            $sourceParametersFile::getTracedFieldsGroup($cardAssignment)
         );
 
         return $table->renderInlineEdit();
