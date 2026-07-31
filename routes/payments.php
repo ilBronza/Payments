@@ -45,6 +45,7 @@ Route::group([
 			->withoutMiddleware('role:paymentsManager')
 			->middleware('role:paymentsManager|cardAssignment');
 
+		//CardassignmentHistoryIndexController
 		Route::get('history', [Payments::getController('cardassignment', 'history'), 'index'])
 			->name('cardAssignments.history')
 			->withoutMiddleware('role:paymentsManager')
