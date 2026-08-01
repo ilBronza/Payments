@@ -30,6 +30,11 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
         return $this->belongsTo(Card::gpc());
     }
 
+    public function getCard() : ? Card
+    {
+        return $this->card;
+    }
+
     public function getUtilizer() : ? Operator
     {
         return $this->utilizer;
@@ -110,6 +115,53 @@ class CardAssignment extends BasePaymentsModel implements HasMedia
     public function getDownloadContractText(): string
     {
         return __('payments::cardassignments.download_contract');
+    }
+
+    public function getNameForSelect()
+    {
+        return cache()->remember(
+            $this->cacheKey('getNameForSelect'),
+            1,
+            function()
+            {
+                $pieces = [
+                    $this->card->getMaskedShortName()
+                ];
+
+                if($value = $this->card->getHolder()->getName())
+                    $pieces[] = $value;
+
+                return implode(" | ", $pieces);
+            }
+        );
+    }
+
+    static function getSelfPossibleValuesArray(string $keyField = null, string $nameField = null) : array
+    {
+        $elements = static::active()->with('card.holder')->get();
+
+        $result = [];
+
+        foreach($elements as $element)
+            $result[$element->getKey()] = $element->getNameForSelect();
+
+        return $result;
+    }
+
+    static function getSelfPossibleValuesArrayByHolder(string $holderId) : array
+    {
+        $elements = static::active()->with('card.holder')->get();
+
+        $result = [];
+
+        foreach($elements as $element)
+            if($element->getCard()?->holder_id == $holderId)
+                $result[$element->getKey()] = $element->getNameForSelect();
+
+        if(count($result) == 0)
+            return static::getSelfPossibleValuesArray();
+
+        return $result;
     }
 
     static function boot()

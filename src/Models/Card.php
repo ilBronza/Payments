@@ -44,6 +44,11 @@ class Card extends BasePaymentsModel
         return $this->belongsTo(Operator::gpc(), 'holder_id');
     }
 
+    public function getHolder() : ? Operator
+    {
+        return $this->holder;
+    }
+
     public function assignments(): HasMany
     {
         return $this->hasMany(CardAssignment::gpc());
@@ -96,6 +101,18 @@ class Card extends BasePaymentsModel
             return $name;
 
         return $this->maskCardNumberPart($matches['cardNumber']) . $matches['suffix'];
+    }
+
+    public function getMaskedShortName() : string
+    {
+        $number = substr($this->getNumber(), -4);
+
+        return "** {$number}";
+    }
+
+    public function getNumber()
+    {
+        return $this->number;
     }
 
     protected function maskCardNumberPart(string $cardNumber) : string
