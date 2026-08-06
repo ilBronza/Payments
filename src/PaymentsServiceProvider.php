@@ -19,6 +19,10 @@ class PaymentsServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (! config('payments.enabled', true)) {
+            return;
+        }
+
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'payments');
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'payments');
@@ -54,6 +58,10 @@ class PaymentsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/payments.php', 'payments');
+
+        if (! config('payments.enabled', true)) {
+            return;
+        }
 
         // Register the service the package provides.
         $this->app->singleton('payments', function ($app) {
