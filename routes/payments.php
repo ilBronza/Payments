@@ -10,8 +10,9 @@ Route::group([
 		'role:paymentsManager'
 	],
 	'prefix' => 'payments-manager',
-	'as' => config('payments.routePrefix')
-], function()
+	'as' => config('payments.routePrefix'),
+	'routeTranslationPrefix' => Payments::getRouteTranslationPrefix(),
+	], function()
 {
 
 	Route::group(['prefix' => 'cards'], function()
