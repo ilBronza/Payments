@@ -66,6 +66,8 @@ use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardcircuitFieldsGr
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\CardtypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\DeadlineFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceDetailFieldsGroupParametersFile;
+use IlBronza\Payments\Http\Controllers\Parameters\Datatables\InvoiceableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymentableFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Datatables\PaymenttypeFieldsGroupParametersFile;
 use IlBronza\Payments\Http\Controllers\Parameters\Fieldsets\BankCreateStoreFieldsetsParameters;
@@ -87,6 +89,8 @@ use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\Cardassi
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardcircuitRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\CardtypeRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\InvoiceRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\DeadlineRelationManager;
+use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\InvoiceableRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymentableRelationManager;
 use IlBronza\Payments\Http\Controllers\Parameters\RelationshipsManagers\PaymenttypeRelationManager;
 use IlBronza\Payments\Http\Controllers\Paymentables\PaymentableCreateStoreController;
@@ -399,6 +403,9 @@ return [
 				'create' => DeadlineShowFieldsetsParameters::class,
 				'edit' => DeadlineShowFieldsetsParameters::class,
 			],
+			'relationshipsManagerClasses' => [
+				'show' => DeadlineRelationManager::class,
+			],
 			'controllers' => [
 				'index' => DeadlineIndexController::class,
 				'create' => DeadlineCreateStoreController::class,
@@ -415,17 +422,23 @@ return [
 		'invoiceDetail' => [
 			'class' => InvoiceDetail::class,
 			'table' => 'payments__invoice_details',
+			'fieldsGroupsFiles' => [
+				'related' => InvoiceDetailFieldsGroupParametersFile::class,
+			],
 		],
 
 		'invoiceable' => [
 			'class' => Invoiceable::class,
 			'table' => 'payments__invoiceables',
+			'fieldsGroupsFiles' => [
+				'index' => InvoiceableFieldsGroupParametersFile::class,
+			],
 			'parametersFiles' => [
 				'show' => InvoiceableShowFieldsetsParameters::class
 			],
-//			'relationshipsManagerClasses' => [
-//				'show' => InvoiceableRelationManager::class
-//			],
+			'relationshipsManagerClasses' => [
+				'show' => InvoiceableRelationManager::class,
+			],
 			'controllers' => [
 				'index' => InvoiceableIndexController::class,
 				'create' => InvoiceableCreateStoreController::class,

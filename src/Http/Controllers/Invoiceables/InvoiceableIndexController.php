@@ -25,7 +25,7 @@ class InvoiceableIndexController extends InvoiceableCRUD
 
     public function getIndexElements()
     {
-        return $this->getModelClass()::with('invoice')->get();
+        return $this->getModelClass()::with('invoice', 'target')->get();
     }
 
 }

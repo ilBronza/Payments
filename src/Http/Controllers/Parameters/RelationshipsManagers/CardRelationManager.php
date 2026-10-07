@@ -11,9 +11,10 @@ class CardRelationManager extends RelationshipsManager
         return [
             'show' => [
                 'relations' => [
-                    // 'cardtype' => config('payments.models.cardtype.controllers.show'),
-                    // 'cardcircuit' => config('payments.models.cardcircuit.controllers.show'),
-                    // 'bankaccount' => config('payments.models.bankaccount.controllers.show'),
+                    'cardtype' => config('payments.models.cardtype.controllers.show'),
+                    'cardcircuit' => config('payments.models.cardcircuit.controllers.show'),
+                    'bankaccount' => config('payments.models.bankaccount.controllers.show'),
+                    ...$this->getHolderRelation(),
                     'assignments' => [
                         'controller' => config('payments.models.cardassignment.controllers.index'),
                         'elementGetterMethod' => 'getRelatedCardassignmentElements',
@@ -22,5 +23,17 @@ class CardRelationManager extends RelationshipsManager
                 ],
             ],
         ];
+    }
+
+    protected function getHolderRelation(): array
+    {
+        if (config('operators.enabled', true) && $controller = config('operators.models.operator.controllers.show')) {
+            return ['holder' => [
+                'controller' => $controller,
+                'translatedTitle' => __('payments::cards.holder'),
+            ]];
+        }
+
+        return [];
     }
 }

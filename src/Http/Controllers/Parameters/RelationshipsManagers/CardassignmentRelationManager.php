@@ -8,11 +8,20 @@ class CardassignmentRelationManager extends RelationshipsManager
 {
     public function getAllRelationsParameters(): array
     {
+        $relations = [
+            'card' => config('payments.models.card.controllers.show'),
+        ];
+
+        if (config('operators.enabled', true) && $controller = config('operators.models.operator.controllers.show')) {
+            $relations['utilizer'] = [
+                'controller' => $controller,
+                'translatedTitle' => __('payments::cardassignments.utilizer'),
+            ];
+        }
+
         return [
             'show' => [
-                'relations' => [
-                    'card' => config('payments.models.card.controllers.show'),
-                ],
+                'relations' => $relations,
             ],
         ];
     }

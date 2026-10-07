@@ -13,6 +13,7 @@ class PaymenttypeRelationManager Extends RelationshipsManager
 				'relations' => [
 					'paymentables' => [
 						'controller' => config('payments.models.paymentable.controllers.index'),
+						'hasCreateButton' => false,
 						'elementGetterMethod' => 'getRelatedPaymentableElements'
 					]
 				]

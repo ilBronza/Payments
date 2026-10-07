@@ -75,6 +75,16 @@ class Invoice extends BasePaymentsModel
 		return $this->hasMany(InvoiceDetail::gpc())->orderBy('sorting_index');
 	}
 
+	public function getRelatedDeadlineElements(): Collection
+	{
+		return $this->deadlines()->with('invoice.emitter')->get();
+	}
+
+	public function getRelatedInvoiceableElements(): Collection
+	{
+		return $this->invoiceables()->with('invoice')->get();
+	}
+
 	public function quotationrows(): MorphToMany
 	{
 		return $this->morphedByMany(

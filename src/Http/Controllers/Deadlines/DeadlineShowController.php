@@ -23,4 +23,9 @@ class DeadlineShowController extends DeadlineCRUD
 
         return $this->_show($deadline);
     }
+
+    public function getRelationshipsManagerClass()
+    {
+        return config("payments.models.{$this->configModelClassName}.relationshipsManagerClasses.show");
+    }
 }

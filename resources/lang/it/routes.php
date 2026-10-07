@@ -157,4 +157,5 @@ return [
 		'update' => 'Aggiorna tipo pagamento',
 		'destroy' => 'Elimina tipo pagamento',
 	],
+    'ibPaymentscardAssignments.inlineCreate' => 'Assegna carta',
 ];
