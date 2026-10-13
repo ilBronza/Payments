@@ -15,6 +15,8 @@ class BankaccountFieldsGroupParametersFile extends FieldsGroupParametersFile
                 'mySelfEdit' => 'links.edit',
                 'mySelfSee' => 'links.see',
                 'iban' => 'flat',
+                'abi' => 'flat',
+                'cab' => 'flat',
                 'account_number' => 'flat',
                 'bank.name' => [
                     'type' => 'flat',

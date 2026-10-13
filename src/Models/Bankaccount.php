@@ -5,12 +5,15 @@ namespace IlBronza\Payments\Models;
 use IlBronza\CRUD\Traits\Model\CRUDUseUuidTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Bankaccount extends BasePaymentsModel
 {
     use CRUDUseUuidTrait;
 
     protected $keyType = 'string';
+
+    protected $fillable = ['iban', 'abi', 'cab', 'account_number', 'bank_id'];
 
     static $modelConfigPrefix = 'bankaccount';
 
@@ -32,7 +35,12 @@ class Bankaccount extends BasePaymentsModel
 
     public function cards(): HasMany
     {
-        return $this->hasMany(Card::gpc());
+        return $this->hasMany(Card::gpc(), 'bankaccount_id');
+    }
+
+    public function bankaccountable(): MorphTo
+    {
+        return $this->morphTo();
     }
 
     public function getRelatedCardElements()

@@ -6,6 +6,8 @@ use IlBronza\CRUD\Providers\RelationshipsManager\RelationshipsManager;
 
 class BankaccountRelationManager extends RelationshipsManager
 {
+    use ResolvesPolymorphicRelations;
+
     public function getAllRelationsParameters(): array
     {
         return [
@@ -16,6 +18,7 @@ class BankaccountRelationManager extends RelationshipsManager
                         'controller' => config('payments.models.card.controllers.index'),
                         'elementGetterMethod' => 'getRelatedCardElements',
                     ],
+                    ...$this->getPolymorphicRelationParameters('bankaccountable'),
                 ],
             ],
         ];

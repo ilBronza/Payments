@@ -13,6 +13,8 @@ class BankaccountCreateStoreFieldsetsParameters extends FieldsetParametersFile
                 'translationPrefix' => 'payments::bankaccounts',
                 'fields' => [
                     'iban' => ['text' => 'string|nullable|max:34'],
+                    'abi' => ['text' => 'nullable|string|regex:/\A[0-9]{5}\z/'],
+                    'cab' => ['text' => 'nullable|string|regex:/\A[0-9]{5}\z/'],
                     'account_number' => ['text' => 'string|nullable|max:64'],
                     'bank' => [
                         'type' => 'select',
