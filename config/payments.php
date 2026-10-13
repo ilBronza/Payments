@@ -113,6 +113,7 @@ use IlBronza\Payments\Models\Deadline;
 use IlBronza\Payments\Models\Invoice;
 use IlBronza\Payments\Models\InvoiceDetail;
 use IlBronza\Payments\Models\Invoiceable;
+use IlBronza\Payments\Models\InvoicingData;
 use IlBronza\Payments\Models\Paymentable;
 use IlBronza\Payments\Models\Paymenttime;
 use IlBronza\Payments\Models\Paymenttype;
@@ -418,6 +419,11 @@ return [
 				'exportCsv' => DeadlineExportCsvController::class,
 			]
 		],
+
+        'invoicingData' => [
+            'class' => InvoicingData::class,
+            'table' => 'payments__invoicing_data',
+        ],
 
 		'invoiceDetail' => [
 			'class' => InvoiceDetail::class,
